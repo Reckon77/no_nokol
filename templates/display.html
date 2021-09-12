@@ -9,9 +9,12 @@
   <body>
     <h1>Extracted sentences</h1>
     <ul>
-      {% for sentence in data %}
-      <li>{{ sentence}}</li>
-      {% endfor %}
+      {% for sentence, src in res.items() %} {% if src == "" %}
+      <li style="color: rgb(0, 255, 0)">{{ sentence }}</li>
+      {% else %}
+      <li style="color: red">{{ sentence }}:</li>
+      <a href=" {{ src }}">Source</a>
+      {% endif %} {% endfor %}
     </ul>
   </body>
 </html>

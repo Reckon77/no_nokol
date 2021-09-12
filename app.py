@@ -25,7 +25,13 @@ def index():
                 path=f"./static/uploads/{filename}"
                 data=extractText(path)
                 # print(data)
-                return render_template('display.html',data=data)
+                res={}
+                try:
+                    res=checkPlag(data)
+                    # print(res)
+                    return render_template('display.html',res=res)
+                except:
+                    return render_template('error.html')
             else:
                 return render_template('error.html')
         else:
