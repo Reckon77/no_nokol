@@ -38,5 +38,19 @@ def index():
             return render_template('error.html')
     return render_template('index.html')
 
+@app.route('/textdata',methods=['POST'])
+def textdata():
+    if request.method=='POST':
+        data = request.form["input"]
+        data = inputDataExtract(data)
+        print(data)
+        res={}
+        try:
+            res=checkPlag(data)
+            # print(res)
+            return render_template('display.html',res=res)
+        except:
+            return render_template('error.html')
+
 if __name__ == "__main__":
     app.run()

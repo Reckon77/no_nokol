@@ -7,7 +7,11 @@ def extractText(path):
     data = re.sub(r'http\S+', '', data)
     data=data.split('. ') 
     return data
-
+def inputDataExtract(textData):
+    textData=" ".join(textData.split())
+    textData = re.sub(r'http\S+', '', textData)
+    textData=textData.split('. ') 
+    return textData
 def allowed_file(filename):
 
     # We only want files with a . in the filename

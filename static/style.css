@@ -1,3 +1,16 @@
 body {
-  background: rgb(0, 236, 253);
+  background: rgb(0, 247, 255);
+}
+#mic {
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  padding: 2px;
+}
+#mic:hover {
+  cursor: pointer;
+}
+.start {
+  color: red;
 }
