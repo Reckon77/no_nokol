@@ -51,6 +51,43 @@ def textdata():
             return render_template('display.html',res=res)
         except:
             return render_template('error.html')
+@app.route('/assamese',methods=['GET','POST'])
+def assamese():
+    if request.method == "POST":
+        if request.files:
+            file = request.files["file"]
+            if file.filename == "":
+                return render_template('error.html')
+            if allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                path=f"./static/uploads/{filename}"
+                try:
+                    data,assameseData=extractAssameseText(path)
+                    res={}
+                    res=checkPlag(data)
+                    # print(res)
+                    return render_template('display.html',res=res,assameseData=assameseData)
+                except:
+                    return render_template('error.html')
+            else:
+                return render_template('error.html')
+        else:
+            return render_template('error.html')
+    return render_template('assamese.html')
 
+@app.route('/assameseText',methods=['POST'])
+def assameseText():
+    if request.method=='POST':
+        data = request.form["input"]
+        try:
+            data,assameseData= inputAssameseDataExtract(data)
+            # print(data)
+            res={}
+            res=checkPlag(data)
+            # print(res)
+            return render_template('display.html',res=res,assameseData=assameseData)
+        except:
+            return render_template('error.html')
 if __name__ == "__main__":
     app.run()
