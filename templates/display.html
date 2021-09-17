@@ -5,15 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+  />
   </head>
   <body>
-    <h1>Extracted sentences</h1>
-    <p>{{assameseData}}</p>
+    <div class="eleven">
+      <h1 class="title">Extracted Sentences</h1>
+    </div>
     <ul>
       {% for sentence, src in res.items() %} {% if src == "" %}
       <li style="color: rgb(0, 255, 0)">{{ sentence }}</li>
       {% else %}
-      <li style="color: red">{{ sentence }}:</li>
+      <li style="color: red" class="blink-hard">{{ sentence }}:</li>
       <a href=" {{ src }}">Source</a>
       {% endif %} {% endfor %}
     </ul>
