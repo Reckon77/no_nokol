@@ -10,31 +10,109 @@
       integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+
     <title>Assamese plag check</title>
   </head>
   <body>
-    <h5>Note : The assamese plag check feature works upto 5000 characters</h5>
-    <form action="/assamese" method="POST" enctype="multipart/form-data">
-      <div class="form-group">
-        <label>Select file</label>
-        <div class="custom-file">
-          <input type="file" class="custom-file-input" name="file" id="file" />
-          <label class="custom-file-label" for="file">Select file...</label>
+
+   
+    <div class="header">
+
+      <!--Content before waves-->
+      <div class="inner-header flex">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="mb-3 mt-3">
+                <h2 class="mb-3" style="font-weight: 300">অসমীয়া</h2>
+                <form action="/assamese" method="POST" enctype="multipart/form-data">
+                  <div class="form-group">
+                    <label class="form-label custom-file-label" for="formFileLg >Select file</label>
+                    <div class="custom-file">
+                      <input type="file"  class="form-control form-control-lg custom-file-input" name="file" id="file" style="margin-bottom: 10px;"/>
+                      <p id="size" style="color: rgb(18, 1, 41); font-weight: bolder; font-size: large;"></p><br />
+                      <label id="progress-label" class="custom-file-label " for="file">Select file...</label>
+                        <div id="feedback" >
+                        </div>
+                      <progress class="d-none" id="progress" value="0" max="100"> </progress>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary" style="margin-right: 13px;">Start Checking</button>
+                  <a href="javascript:location.reload(true)">
+                    <span class="glyphicon"></span><img src="/static/assets/reload.gif" alt="refresh button" height="36px" width="55px">
+                  </a>
+                  <a href="#assamese-input">
+                    <span class="glyphicon" style="position: absolute; color: white; margin-top: 9px; margin-left: 11px; font-size: 16.5px;">Text Input</span><img src="/static/assets/text.gif" alt="refresh button" height="45px" width="102px" style=" position: relative;">
+                  </a>
+                </form> 
+            </div>
+            <div style="margin-top: 12px;">
+              <a href="/" style="color: white;">Non-Assamese Plag Check</a></div>
+            </div>
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary">Upload</button>
+      <div class="alert alert-warning d-none mb-3 mt-3" id="alert-modal"><span style="font-weight: bolder; color:red">WARNING!</span> File size greater than 10mb not allowed.</div>
+
+      <div class="alert alert-success d-none mb-3 mt-3" id="alert-modal-ext"><span style="font-weight: bolder; color:seagreen">INFO!</span> File extension allowed are: .DOC |.TXT |.PDF| .ODT</div>
+
+      <div class="alert alert-success mb-3 mt-3" id="alert-modal-sentence"><span style="font-weight: bolder; color:seagreen">INFO!</span> The assamese plag check feature works upto 5000 characters</div>
+
+      
+      <!--Waves Container-->
+      <div>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+        <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+        </g>
+        </svg>
+      </div>
+      <!--Waves end-->
+      
+    </div>
+      <!--Header ends-->
+      
+      
+
+   
+
+
+      
     </form>
-    <div class="container my-5">
+    <div class="container my-5 " id="assamese-input">
       <form action="/assameseText" method="POST">
         <textarea
+        id='output'
+        style="margin-top: 120px ;"
           name="input"
           class="form-control"
           rows="10"
           placeholder="Enter the assamese text"
         ></textarea>
         <button type="submit">Submit</button>
+        <input type="button" value="Clear" onclick="javascript:eraseText();"> 
+
       </form>
     </div>
+
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"
+  ></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+  <script src="{{ url_for('static', filename='voice.js') }}"></script>
+
   </body>
 </html>

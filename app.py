@@ -1,6 +1,4 @@
-from flask import Flask
-from flask import render_template
-from flask import request, redirect
+from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 import os
 from os.path import join, dirname, realpath
@@ -9,6 +7,7 @@ from modules import *
 app = Flask(__name__)
 UPLOADS_PATH = join(dirname(realpath(__file__)), 'static/uploads/')
 app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024 #File size limit 10mb
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -16,7 +15,10 @@ def index():
     if request.method == "POST":
 
         if request.files:
-            file = request.files["file"]
+            file = request.files['file']
+            print(file)
+
+
             if file.filename == "":
                 return render_template('error.html')
             if allowed_file(file.filename):
@@ -51,6 +53,7 @@ def textdata():
             return render_template('display.html',res=res)
         except:
             return render_template('error.html')
+            
 @app.route('/assamese',methods=['GET','POST'])
 def assamese():
     if request.method == "POST":
@@ -89,5 +92,11 @@ def assameseText():
             return render_template('display.html',res=res,assameseData=assameseData)
         except:
             return render_template('error.html')
+
+
+@app.errorhandler(413)
+def too_large(e):
+    return "File size is too large.", 413
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

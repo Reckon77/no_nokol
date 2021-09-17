@@ -1,5 +1,7 @@
 import re
 from tika import parser
+import tika
+tika.initVM()
 #API keys
 from dotenv import load_dotenv
 import os
