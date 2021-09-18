@@ -195,9 +195,9 @@ progress[value]::-webkit-progress-value {
   color: red;
 }
 
-.blink-hard {
-  animation: blinker 1s step-end infinite;
-}
+/* .blink-hard {
+  animation: blinker 0.5s step-end infinite;
+} */
 
 @keyframes blinker {
   50% {
@@ -292,4 +292,12 @@ progress[value]::-webkit-progress-value {
 .title:before,
 .title:after {
   background-color: #c50000;
+}
+.results {
+  width: 100%;
+}
+.results,
+td {
+  border: 1px solid black;
+  padding: 1.5rem;
 }
