@@ -132,3 +132,55 @@ def checkPlag(data):
     k = Counter(websites)
     mostProbable = k.most_common(3)
     return res,plagCount,total,mostProbable
+
+#Intelligent Plagiarism checker
+import nltk
+from nltk.corpus import wordnet
+from nltk.corpus import brown
+freqs = nltk.FreqDist(w.lower() for w in brown.words())
+
+def findSynonym(word):
+    synonyms = []
+    if len(word)==0:
+        return ""
+    for syn in wordnet.synsets(word):
+        for l in syn.lemmas():
+            synonyms.append(l.name())
+    if len(synonyms)==0:
+        return word
+    synonyms=set(synonyms)
+    synonyms=list(synonyms)
+    maxFreq=freqs[synonyms[0]]
+    wrd=synonyms[0]
+    for synWord in synonyms:
+        if freqs[synWord]>maxFreq:
+            wrd=synWord
+            maxFreq=freqs[synWord]
+    if word.upper()==wrd.upper():
+        return word
+    if word[0].isupper():
+        return wrd.capitalize()
+    return wrd
+
+def transformSentence(text):
+    text = nltk.word_tokenize(text)
+    synonyms=[]
+    for w in text:
+        synonyms.append(findSynonym(w))
+    res=" ".join(synonyms)
+    res2=""
+    if len(res)==0:
+        return res
+    res2+=res[0]
+    punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+    for x in range(1, len(res)):
+        if res[x] in punctuations and res[x-1]==' ':
+            res2 = res2[:-1]
+        res2+=res[x]
+    return res2
+
+def transformToSynonyms(data):
+    synonymSentences=[]
+    for s in data:
+        synonymSentences.append(transformSentence(s))
+    return synonymSentences,data

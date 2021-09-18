@@ -92,6 +92,45 @@ def assameseText():
         except:
             return render_template('error.html')
 
+@app.route("/intelligent",methods=['GET','POST'])
+def intelligent():
+    if request.method == "POST":
+        if request.files:
+            file = request.files['file']
+            if file.filename == "":
+                return render_template('error.html')
+            if allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                path=f"./static/uploads/{filename}"
+                data=extractText(path)
+                data,original=transformToSynonyms(data)
+                res={}
+                try:
+                    res,plagCount,total,mostProbable=checkPlag(data)
+                    # print(res)
+                    return render_template('displayIntelligent.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable,original=original)
+                except:
+                    return render_template('error.html')
+            else:
+                return render_template('error.html')
+        else:
+            return render_template('error.html')
+    return render_template('intelligent.html')
+
+@app.route('/intelligentTextdata',methods=['POST'])
+def intelligentTextdata():
+    if request.method=='POST':
+        data = request.form["input"]
+        data = inputDataExtract(data)
+        data,original=transformToSynonyms(data)
+        res={}
+        try:
+            res,plagCount,total,mostProbable=checkPlag(data)
+            # print(res)
+            return render_template('displayIntelligent.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable,original=original)
+        except:
+            return render_template('error.html')
 
 @app.errorhandler(413)
 def too_large(e):
