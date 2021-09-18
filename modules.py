@@ -85,7 +85,7 @@ def allowed_file(filename):
     ext = filename.rsplit(".", 1)[1]
 
     # Check if the extension is in allowed
-    allowed=["PDF", "TXT", "DOCX"]
+    allowed=["PDF", "TXT", "DOCX", "ODT"]
     if ext.upper() in allowed:
         return True
     else:
