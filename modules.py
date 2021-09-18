@@ -95,39 +95,40 @@ def allowed_file(filename):
 
 # Scrapper
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.options import Options
 
-chrome_options = Options()
-chrome_options.add_argument('--headless')
+def findPlag(text):
+    text = text.replace(" ","+")
+    # print(text)
+    url = f'https://www.bing.com/search?q="{text}"&qs=n&form=QBRE&sp=-1&pq={text.lower()}"' # f'https://www.google.com?q="{text}&oq={text}&sourceid=chrome&ie=UTF-8"'  # "https://dataquestio.github.io/web-scraping-pages/simple.html"
+    # Crafting the proper request to fool Google
+    header = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'}
+    page = requests.get(url, headers= header, allow_redirects=True)
+    content = BeautifulSoup(page.content, 'html.parser')
+    # print(content.prettify())
+    # return content
+    # link= content.find('h2')
+    try:
+        element=content.find('li',class_='b_algo').h2
+        link= element.find('a')['href']
+        return link
+    except:
+        return ""
 
-# Line we have to update outdated line:
-chrome_options.add_argument(
-    'userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36')
-browser = webdriver.Chrome(
-    ChromeDriverManager().install(), options=chrome_options)
 
-
-def findPlag(sentence_to_search):
-    sentence_to_search = sentence_to_search.replace(' ', '+')
-    url = f'https://www.google.com/search?q="{sentence_to_search}"&num10'
-
-    browser.get(url)
-    soup = BeautifulSoup(browser.page_source, 'html.parser')
-
-    result = soup.find('div', class_='card-section rQUFld')
-    if result == None:
-        try:
-            link = soup.find('div', class_='yuRUbf').a['href']
-            return link
-        except:
-            return ""
-    else:
-        return ''
-
+from collections import defaultdict,Counter
 def checkPlag(data):
     res={}
+    websites=defaultdict(int)
+    plagCount=0
+    total=0
     for sentence in data:
-        res[sentence]=findPlag(sentence)
-    return res
+        link=findPlag(sentence)
+        res[sentence]=link
+        total+=1
+        if link!='':
+            websites[link]+=1
+        if res[sentence]!='':
+            plagCount+=1
+    k = Counter(websites)
+    mostProbable = k.most_common(3)
+    return res,plagCount,total,mostProbable

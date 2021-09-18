@@ -6,14 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='style.css') }}"
-  />
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
   </head>
   <body>
     <div class="eleven">
       <h1 class="title">Extracted Sentences</h1>
+      <h5>
+        <span id="plagCount">{{plagCount}}</span> out of
+        <span id="totalSentences"> {{total}}</span> sentences plagiarised
+      </h5>
+      <h5><span id="plagPercent">0</span> % plagiarised</h5>
+      {% if mostProbable|length > 0 %}
+      <p>Most Probable Sources</p>
+      {% for sites in mostProbable %}
+      <li><a href="{{sites[0]}}">{{sites[0]}}</a></li>
+      {% endfor %} {% endif %}
     </div>
+    {% if assameseData|length > 0 %}
+    <h1>Extracted text</h1>
+    <p>{{assameseData}}</p>
+    {% endif %}
     <ul>
       {% for sentence, src in res.items() %} {% if src == "" %}
       <li style="color: rgb(0, 255, 0)">{{ sentence }}</li>
@@ -22,5 +36,6 @@
       <a href=" {{ src }}">Source</a>
       {% endif %} {% endfor %}
     </ul>
+    <script src="{{ url_for('static', filename='display.js') }}"></script>
   </body>
 </html>

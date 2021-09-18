@@ -1,46 +1,50 @@
-
 /* main home page styles */
 @import url(//fonts.googleapis.com/css?family=Lato:300:400);
 
 body {
-  margin:0;
+  margin: 0;
 }
 
 h1 {
-  font-family: 'Lato', sans-serif;
-  font-weight:300;
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
   letter-spacing: 2px;
-  font-size:48px;
+  font-size: 48px;
 }
 p {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   letter-spacing: 1px;
-  font-size:14px;
+  font-size: 14px;
   color: #333333;
 }
 
 .header {
-  position:relative;
-  text-align:center;
-  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
-  color:white;
+  position: relative;
+  text-align: center;
+  background: linear-gradient(
+    60deg,
+    rgba(84, 58, 183, 1) 0%,
+    rgba(0, 172, 193, 1) 100%
+  );
+  color: white;
 }
 .logo {
-  width:50px;
-  fill:white;
-  padding-right:15px;
-  display:inline-block;
+  width: 50px;
+  fill: white;
+  padding-right: 15px;
+  display: inline-block;
   vertical-align: middle;
 }
 
 .inner-header {
-  height:65vh;
-  width:100%;
+  height: 65vh;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
 
-.flex { /*Flexbox for containers*/
+.flex {
+  /*Flexbox for containers*/
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,24 +52,24 @@ p {
 }
 
 .waves {
-  position:relative;
+  position: relative;
   width: 100%;
-  height:15vh;
-  margin-bottom:-7px; /*Fix for safari gap*/
-  min-height:100px;
-  max-height:150px;
+  height: 15vh;
+  margin-bottom: -7px; /*Fix for safari gap*/
+  min-height: 100px;
+  max-height: 150px;
 }
 
 .content {
-  position:relative;
-  height:20vh;
-  text-align:center;
+  position: relative;
+  height: 20vh;
+  text-align: center;
   background-color: white;
 }
 
-  /* Home page animation */
+/* Home page animation */
 .parallax > use {
-  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5)     infinite;
+  animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
 }
 .parallax > use:nth-child(1) {
   animation-delay: -2s;
@@ -85,28 +89,27 @@ p {
 }
 @keyframes move-forever {
   0% {
-    transform: translate3d(-90px,0,0);
+    transform: translate3d(-90px, 0, 0);
   }
-  100% { 
-    transform: translate3d(85px,0,0);
+  100% {
+    transform: translate3d(85px, 0, 0);
   }
 }
-  /*Shrinking for mobile*/
+/*Shrinking for mobile*/
 @media (max-width: 768px) {
   .waves {
-    height:40px;
-    min-height:40px;
+    height: 40px;
+    min-height: 40px;
   }
   .content {
-    height:30vh;
+    height: 30vh;
   }
   h1 {
-    font-size:24px;
+    font-size: 24px;
   }
 }
 
-
-/* Progress bar styles */ 
+/* Progress bar styles */
 progress[value] {
   width: 300px;
   height: 14px;
@@ -121,82 +124,88 @@ progress[value] {
 progress[value]::-webkit-progress-value {
   border-radius: 50px;
   box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.5);
-  background-image: -webkit-linear-gradient(45deg, transparent, transparent 33%, rgba(0, 0, 0, 0.1) 33%, rgba(0, 0, 0, 0.1) 66%, transparent 66%), -webkit-linear-gradient(top, rgba(255, 255, 255, .5), rgba(6, 71, 156, 0.692)), -webkit-linear-gradient(left, #2c40b3, #0ea7ee);
+  background-image: -webkit-linear-gradient(
+      45deg,
+      transparent,
+      transparent 33%,
+      rgba(0, 0, 0, 0.1) 33%,
+      rgba(0, 0, 0, 0.1) 66%,
+      transparent 66%
+    ),
+    -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(6, 71, 156, 0.692)),
+    -webkit-linear-gradient(left, #2c40b3, #0ea7ee);
   /* with stripe pattern*/
   background-size: 25px 14px, 100% 100%, 100% 100%;
 }
 
-
-
 /* /*404 Error page styles * */
-.page_404{ padding:40px 0; background:#fff; font-family: 'Arvo', serif;
+.page_404 {
+  padding: 40px 0;
+  background: #fff;
+  font-family: "Arvo", serif;
 }
 
-.page_404  img{ width:100%;}
+.page_404 img {
+  width: 100%;
+}
 
 .four_zero_four_bg {
-
   background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
-    height: 400px;
-    background-position: center;}
-    
-    .four_zero_four_bg h1{
-    font-size:80px;
-    }
+  height: 400px;
+  background-position: center;
+}
 
-    .four_zero_four_bg h3{
-      font-size:80px;
-    }
-    
-    .link_404{
-    color: #fff!important;
-    padding: 10px 20px;
-    background: #39ac31;
-    margin: 20px 0;
-    display: inline-block;}
+.four_zero_four_bg h1 {
+  font-size: 80px;
+}
 
-	.contant_box_404{ 
-    margin-top:-50px;
+.four_zero_four_bg h3 {
+  font-size: 80px;
+}
+
+.link_404 {
+  color: #fff !important;
+  padding: 10px 20px;
+  background: #39ac31;
+  margin: 20px 0;
+  display: inline-block;
+}
+
+.contant_box_404 {
+  margin-top: -50px;
+}
+
+.alert {
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#mic {
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  padding: 2px;
+}
+#mic:hover {
+  cursor: pointer;
+}
+.start {
+  color: red;
+}
+
+.blink-hard {
+  animation: blinker 1s step-end infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
   }
+}
 
-
-  .alert {
-    display: inline-block;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
-
-
-  #mic {
-    margin-left: 10px;
-    width: 30px;
-    height: 30px;
-    border: 1px solid black;
-    padding: 2px;
-  }
-  #mic:hover {
-    cursor: pointer;
-  }
-  .start {
-    color: red;
-  }
-
-  
-
-  .blink-hard {
-    animation: blinker 1s step-end infinite;
-  }
-
-  @keyframes blinker {
-    50% {
-      opacity: 0;
-    }
-  }
-  
-
-
-  /* === BASE HEADING === */ 
+/* === BASE HEADING === */
 
 .title {
   position: relative;
@@ -222,27 +231,43 @@ progress[value]::-webkit-progress-value {
 }
 
 .eleven .title {
-  font-size:30px;text-align:center; line-height:1.5em; padding-bottom:45px; font-family:"Playfair Display", serif; text-transform:uppercase;letter-spacing: 2px; color:#111;
+  font-size: 30px;
+  text-align: center;
+  line-height: 1.5em;
+  padding-bottom: 45px;
+  font-family: "Playfair Display", serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #111;
 }
-
 
 .eleven .title:before {
   position: absolute;
   left: 0;
   bottom: 20px;
   width: 60%;
-  left:50%; margin-left:-30%;
+  left: 50%;
+  margin-left: -30%;
   height: 1px;
   content: "";
-  background-color: #777; z-index: 4;
+  background-color: #777;
+  z-index: 4;
 }
 .eleven .title:after {
-  position:absolute;
-  width:40px; height:40px; left:50%; margin-left:-20px; bottom:0px;
-  content: '\00a7'; font-size:30px; line-height:40px; color:#c50000;
-  font-weight:400; z-index: 5;
-  display:block;
-  background-color:#f8f8f8;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 50%;
+  margin-left: -20px;
+  bottom: 0px;
+  content: "\00a7";
+  font-size: 30px;
+  line-height: 40px;
+  color: #c50000;
+  font-weight: 400;
+  z-index: 5;
+  display: block;
+  background-color: #f8f8f8;
 }
 
 /* ------- Helper Styles -------------*/
@@ -268,5 +293,3 @@ progress[value]::-webkit-progress-value {
 .title:after {
   background-color: #c50000;
 }
-
-

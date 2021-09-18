@@ -29,9 +29,9 @@ def index():
                 # print(data)
                 res={}
                 try:
-                    res=checkPlag(data)
+                    res,plagCount,total,mostProbable=checkPlag(data)
                     # print(res)
-                    return render_template('display.html',res=res)
+                    return render_template('display.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
                 except:
                     return render_template('error.html')
             else:
@@ -45,12 +45,11 @@ def textdata():
     if request.method=='POST':
         data = request.form["input"]
         data = inputDataExtract(data)
-        print(data)
         res={}
         try:
-            res=checkPlag(data)
+            res,plagCount,total,mostProbable=checkPlag(data)
             # print(res)
-            return render_template('display.html',res=res)
+            return render_template('display.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
         except:
             return render_template('error.html')
             
@@ -68,9 +67,9 @@ def assamese():
                 try:
                     data,assameseData=extractAssameseText(path)
                     res={}
-                    res=checkPlag(data)
+                    res,plagCount,total,mostProbable=checkPlag(data)
                     # print(res)
-                    return render_template('display.html',res=res,assameseData=assameseData)
+                    return render_template('display.html',res=res,plagCount=plagCount,total=total,assameseData=assameseData,mostProbable=mostProbable)
                 except:
                     return render_template('error.html')
             else:
@@ -87,9 +86,9 @@ def assameseText():
             data,assameseData= inputAssameseDataExtract(data)
             # print(data)
             res={}
-            res=checkPlag(data)
+            res,plagCount,total,mostProbable=checkPlag(data)
             # print(res)
-            return render_template('display.html',res=res,assameseData=assameseData)
+            return render_template('display.html',res=res,plagCount=plagCount,total=total,assameseData=assameseData,mostProbable=mostProbable)
         except:
             return render_template('error.html')
 
