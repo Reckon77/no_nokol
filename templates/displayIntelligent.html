@@ -16,8 +16,8 @@
       href="{{ url_for('static', filename='style.css') }}"
     />
   </head>
-  <body>
-    <div class="eleven">
+  <body class="background-1">
+    <div class="eleven card">
       <h1 class="title">Extracted Sentences</h1>
       <h5>
         <span id="plagCount">{{plagCount}}</span> out of
@@ -36,18 +36,18 @@
         <tr>
           <td style="color: rgb(0, 255, 0)">
             Transformed : {{ sentence }}
-            <p>Original : {{original[loop.index0]}}</p>
+            <p style="color: white;">Original : {{original[loop.index0]}}</p>
           </td>
-          <td class="btn btn-danger btn-sm orignalSentence">Unselect</td>
+          <td class="orignalSentence unselect fourth">Unselect</td>
         </tr>
 
         {% else %}
         <tr>
           <td style="color: red">
             Transformed : {{ sentence }} : <a href=" {{ src }}">Source</a>
-            <p>Original : {{original[loop.index0]}}</p>
+            <p style="color: white;">Original : {{original[loop.index0]}}</p>
           </td>
-          <td class="btn btn-danger btn-sm plagiarisedSentence">Unselect</td>
+          <td class="btn-sm plagiarisedSentence unselect fourth">Unselect</td>
         </tr>
         {% endif %} {% endfor %}
       </table>

@@ -16,8 +16,8 @@
       href="{{ url_for('static', filename='style.css') }}"
     />
   </head>
-  <body>
-    <div class="eleven">
+  <body class="background-1">
+    <div class="eleven card">
       <h1 class="title">Extracted Sentences</h1>
       <h5>
         <span id="plagCount">{{plagCount}}</span> out of
@@ -27,7 +27,7 @@
       {% if mostProbable|length > 0 %}
       <p>Most Probable Sources</p>
       {% for sites in mostProbable %}
-      <li><a href="{{sites[0]}}">{{sites[0]}}</a></li>
+      <li><a href="{{sites[0]}}" style="word-wrap: break-word;">{{sites[0]}}</a></li>
       {% endfor %} {% endif %}
     </div>
     {% if assameseData|length > 0 %}
@@ -55,7 +55,7 @@
         {% for sentence, src in res.items() %} {% if src == "" %}
         <tr>
           <td style="color: rgb(0, 255, 0)">{{ sentence }}</td>
-          <td class="btn btn-danger btn-sm orignalSentence">Unselect</td>
+          <td class="orignalSentence unselect fourth">Unselect</td>
         </tr>
 
         {% else %}
@@ -63,11 +63,12 @@
           <td style="color: red">
             {{ sentence }} : <a href=" {{ src }}">Source</a>
           </td>
-          <td class="btn btn-danger btn-sm plagiarisedSentence">Unselect</td>
+          <td class=" btn-sm plagiarisedSentence unselect fourth">Unselect</td>
         </tr>
         {% endif %} {% endfor %}
       </table>
     </div>
+  
 
     <script src="{{ url_for('static', filename='display.js') }}"></script>
   </body>

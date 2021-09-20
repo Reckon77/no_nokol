@@ -38,3 +38,6 @@ for (let i = 0; i < plagiarisedSentence.length; i++) {
       //e.target.parentNode.parentNode.removeChild(e.target.parentNode);
     }, false);
   }
+
+
+ 
