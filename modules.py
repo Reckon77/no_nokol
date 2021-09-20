@@ -96,16 +96,33 @@ def allowed_file(filename):
 # Scrapper
 from bs4 import BeautifulSoup
 
+# def findPlag(text):
+#     text = text.replace(" ","+")
+#     # print(text)
+#     url = f'https://www.bing.com/search?q="{text}"&qs=n&form=QBRE&sp=-1&pq={text.lower()}"' # f'https://www.google.com?q="{text}&oq={text}&sourceid=chrome&ie=UTF-8"'  # "https://dataquestio.github.io/web-scraping-pages/simple.html"
+#     # Crafting the proper request to fool Google
+#     header = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'}
+#     page = requests.get(url, headers= header, allow_redirects=True)
+#     content = BeautifulSoup(page.content, 'html.parser')
+#     # print(content.prettify())
+#     # return content
+#     # link= content.find('h2')
+#     try:
+#         element=content.find('li',class_='b_algo').h2
+#         link= element.find('a')['href']
+#         return link
+#     except:
+#         return ""
 def findPlag(text):
-    text = text.replace(" ","+")
+    #text = text.replace(" ","+")
     # print(text)
-    url = f'https://www.bing.com/search?q="{text}"&qs=n&form=QBRE&sp=-1&pq={text.lower()}"' # f'https://www.google.com?q="{text}&oq={text}&sourceid=chrome&ie=UTF-8"'  # "https://dataquestio.github.io/web-scraping-pages/simple.html"
+    url = f'https://www.bing.com/search?q=%2B"{text}"&qs=n&form=QBRE&sp=-1&pq=%2B"{text.lower()}"' # f'https://www.google.com?q="{text}&oq={text}&sourceid=chrome&ie=UTF-8"'  # "https://dataquestio.github.io/web-scraping-pages/simple.html"
     # Crafting the proper request to fool Google
     header = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'}
     page = requests.get(url, headers= header, allow_redirects=True)
     content = BeautifulSoup(page.content, 'html.parser')
-    # print(content.prettify())
-    # return content
+    #print(content.prettify())
+    #return content
     # link= content.find('h2')
     try:
         element=content.find('li',class_='b_algo').h2
@@ -113,8 +130,23 @@ def findPlag(text):
         return link
     except:
         return ""
-
-
+def findPlagAssamese(text):
+    #text = text.replace(" ","+")
+    # print(text)
+    url = f'https://www.bing.com/search?q="{text}"&qs=n&form=QBRE&sp=-1&pq="{text.lower()}"' # f'https://www.google.com?q="{text}&oq={text}&sourceid=chrome&ie=UTF-8"'  # "https://dataquestio.github.io/web-scraping-pages/simple.html"
+    # Crafting the proper request to fool Google
+    header = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'}
+    page = requests.get(url, headers= header, allow_redirects=True)
+    content = BeautifulSoup(page.content, 'html.parser')
+    #print(content.prettify())
+    #return content
+    # link= content.find('h2')
+    try:
+        element=content.find('li',class_='b_algo').h2
+        link= element.find('a')['href']
+        return link
+    except:
+        return ""
 from collections import defaultdict,Counter
 def checkPlag(data):
     res={}
@@ -133,6 +165,22 @@ def checkPlag(data):
     mostProbable = k.most_common(3)
     return res,plagCount,total,mostProbable
 
+def checkPlagAssamese(data):
+    res={}
+    websites=defaultdict(int)
+    plagCount=0
+    total=0
+    for sentence in data:
+        link=findPlagAssamese(sentence)
+        res[sentence]=link
+        total+=1
+        if link!='':
+            websites[link]+=1
+        if res[sentence]!='':
+            plagCount+=1
+    k = Counter(websites)
+    mostProbable = k.most_common(3)
+    return res,plagCount,total,mostProbable
 #Intelligent Plagiarism checker
 import nltk
 from nltk.corpus import wordnet

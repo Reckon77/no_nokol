@@ -67,7 +67,7 @@ def assamese():
                 try:
                     data,assameseData=extractAssameseText(path)
                     res={}
-                    res,plagCount,total,mostProbable=checkPlag(data)
+                    res,plagCount,total,mostProbable=checkPlagAssamese(data)
                     # print(res)
                     return render_template('display.html',res=res,plagCount=plagCount,total=total,assameseData=assameseData,mostProbable=mostProbable)
                 except:
@@ -86,7 +86,7 @@ def assameseText():
             data,assameseData= inputAssameseDataExtract(data)
             # print(data)
             res={}
-            res,plagCount,total,mostProbable=checkPlag(data)
+            res,plagCount,total,mostProbable=checkPlagAssamese(data)
             # print(res)
             return render_template('display.html',res=res,plagCount=plagCount,total=total,assameseData=assameseData,mostProbable=mostProbable)
         except:
