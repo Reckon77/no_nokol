@@ -34,7 +34,7 @@
     </div>
     <div class="overlay"></div>
     <div class="container">
-        <nav>
+        <nav class="pt-0">
             <h1 class="brand"><a href="/" style="text-decoration: none; color: rgb(9, 31, 102);"><span id="blink">No</span>_Nokol</a></h1>
             <ul>
                 <li><a class="link-styles" href="/assamese"><span style="font-weight: 800;">অসমীয়া</span> PLag-Check</a></li>
@@ -55,7 +55,7 @@
           <div class="row">
             <div class="col">
               <div class="mb-3 mt-3">
-                <h2 class="mb-3" style="font-weight: 300">Non-Assamese</h2>
+                <h2 class="mb-3" style="font-weight: 300">English</h2>
                 <form action="/" method="POST" enctype="multipart/form-data">
                   <div class="form-group">
                     <label class="form-label custom-file-label" for="formFileLg >Select file</label>
@@ -85,7 +85,7 @@
 
       <div class="alert alert-warning d-none mb-3 mt-3" id="alert-modal"><span style="font-weight: bolder; color:red">WARNING!</span> File size greater than 20mb not allowed.</div>
 
-      <div class="alert alert-success d-none mb-3 mt-3" id="alert-modal-ext"><span style="font-weight: bolder; color:seagreen">INFO!</span> File extension allowed are: .DOC |.TXT |.PDF| .ODT</div>
+      <div class="alert alert-success d-none mb-3 mt-5" id="alert-modal-ext"><span style="font-weight: bolder; color:seagreen">INFO!</span> File extension allowed are: .DOC |.TXT |.PDF</div>
 
       
       <!--Waves Container-->
@@ -107,12 +107,15 @@
       
     </div>
       <!--Header ends-->
-      
-      <div class="container my-5" id="non-assamese">
+     
+      <div class="container my-5 d-flex flex-column" id="non-assamese">
+        <div class="alert alert-info" role="alert">
+          How it works: English plagiarism checker breaks the document into sentences and looks for matches of those sentences on the web.
+        </div>
         <form action="/textdata" method="POST">
           <textarea
           id='output'
-          style="margin-top: 200px ;"
+          style="margin-top: 50px ;"
             name="input"
             class="form-control textArea"
             rows="10"
@@ -138,7 +141,7 @@
             />
           </svg>
           <button id="stop"  style="margin-top: 10px;" class="btn btn-danger d-none">Stop</button>
-          <input style="margin-top: 10px; margin-left: 10px;" type="button" class="btn btn-outline-secondary" value="Clear" onclick="javascript:eraseText();"> 
+          <!-- <input style="margin-top: 10px; margin-left: 10px;" type="button" class="btn btn-outline-secondary" value="Clear" onclick="javascript:eraseText();">  -->
           <p id="ins" style="margin-left: 70px;">Press the mic</p>
         </form>
       </div>

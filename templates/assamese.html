@@ -33,10 +33,10 @@
     </div>
     <div class="overlay"></div>
     <div class="container">
-        <nav>
+        <nav class="pt-0">
             <h1 class="brand"><a href="/" style="text-decoration: none; color: rgb(9, 31, 102);"><span id="blink">No</span>_Nokol</a></h1>
             <ul>
-                <li><a href="/" class="link-styles">Non-Assamese Plag-Check</a></li>
+                <li><a href="/" class="link-styles">English Plag-Check</a></li>
                 <li><a href="/intelligent" class="link-styles">Intelligent Plag-Check</a></li>
             </ul>
         </nav>
@@ -49,7 +49,7 @@
           <div class="row">
             <div class="col">
               <div class="mb-3 mt-3">
-                <h2 class="mb-3" style="font-weight: 300; margin-top: -100px;">অসমীয়া</h2>
+                <h2 class="mb-3" style="font-weight: 300; margin-top: -50px;">অসমীয়া</h2>
                 <form action="/assamese" method="POST" enctype="multipart/form-data">
                   <div class="form-group">
                     <label class="form-label custom-file-label" for="formFileLg >Select file</label>
@@ -79,7 +79,7 @@
 
       <div class="alert alert-warning d-none mb-3 mt-3" id="alert-modal"><span style="font-weight: bolder; color:red">WARNING!</span> File size greater than 20mb not allowed.</div>
 
-      <div class="alert alert-success d-none mb-3 mt-3" id="alert-modal-ext"><span style="font-weight: bolder; color:seagreen">INFO!</span> File extension allowed are: .DOC |.TXT |.PDF| .ODT</div>
+      <div class="alert alert-success d-none mb-3 mt-3" id="alert-modal-ext"><span style="font-weight: bolder; color:seagreen">INFO!</span> File extension allowed are: .DOC |.TXT |.PDF</div>
 
       <div class="alert alert-success" id="alert-modal-sentence" style="margin-top: -40px;"><span style="font-weight: bolder; color:seagreen;">INFO!</span> The assamese plag check feature works upto 5000 characters</div>
 
@@ -111,18 +111,21 @@
 
       
     </form>
-    <div class="container my-5 " id="assamese-input">
+    <div class="container my-5 d-flex flex-column" id="assamese-input">
+      <div class="alert alert-info" role="alert">
+        How it works: Assamese plagiarism checker first translates the document into English and then checks for plagiarism.
+      </div>
       <form action="/assameseText" method="POST">
         <textarea
         id='output'
-        style="margin-top: 120px ;"
+        style="margin-top: 50px ;"
           name="input"
           class="form-control"
           rows="10"
           placeholder="Enter the assamese text"
         ></textarea>
         <button type="submit" class="btn btn-outline-primary" style="margin-top: 10px;">Submit</button>
-        <input style="margin-top: 10px; margin-left: 10px;" type="button" value="Clear"  class="btn btn-outline-secondary" onclick="javascript:eraseText();"> 
+        <!-- <input style="margin-top: 10px; margin-left: 10px;" type="button" value="Clear"  class="btn btn-outline-secondary" onclick="javascript:eraseText();">  -->
 
       </form>
     </div>
