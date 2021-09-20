@@ -130,7 +130,7 @@ def findPlag(text):
         return link
     except:
         return ""
-def findPlagAssamese(text):
+def findPlagNormal(text):
     #text = text.replace(" ","+")
     # print(text)
     url = f'https://www.bing.com/search?q="{text}"&qs=n&form=QBRE&sp=-1&pq="{text.lower()}"' # f'https://www.google.com?q="{text}&oq={text}&sourceid=chrome&ie=UTF-8"'  # "https://dataquestio.github.io/web-scraping-pages/simple.html"
@@ -165,13 +165,13 @@ def checkPlag(data):
     mostProbable = k.most_common(3)
     return res,plagCount,total,mostProbable
 
-def checkPlagAssamese(data):
+def checkPlagNormal(data):
     res={}
     websites=defaultdict(int)
     plagCount=0
     total=0
     for sentence in data:
-        link=findPlagAssamese(sentence)
+        link=findPlagNormal(sentence)
         res[sentence]=link
         total+=1
         if link!='':
@@ -191,6 +191,13 @@ def findSynonym(word):
     synonyms = []
     if len(word)==0:
         return ""
+    wordList=[]
+    wordList.append(word)
+    tagged = nltk.pos_tag(wordList)
+    allowed=["NN","NNS","JJ","JJR","JJS"]
+    POS=tagged[0][1]
+    if POS not in allowed:
+        return word
     for syn in wordnet.synsets(word):
         for l in syn.lemmas():
             synonyms.append(l.name())
