@@ -67,7 +67,7 @@ def assamese():
                 try:
                     data,assameseData=extractAssameseText(path)
                     res={}
-                    res,plagCount,total,mostProbable=checkPlag(data)
+                    res,plagCount,total,mostProbable=checkPlagNormal(data)
                     # print(res)
                     return render_template('display.html',res=res,plagCount=plagCount,total=total,assameseData=assameseData,mostProbable=mostProbable)
                 except:
@@ -86,7 +86,7 @@ def assameseText():
             data,assameseData= inputAssameseDataExtract(data)
             # print(data)
             res={}
-            res,plagCount,total,mostProbable=checkPlag(data)
+            res,plagCount,total,mostProbable=checkPlagNormal(data)
             # print(res)
             return render_template('display.html',res=res,plagCount=plagCount,total=total,assameseData=assameseData,mostProbable=mostProbable)
         except:
@@ -107,7 +107,7 @@ def intelligent():
                 data,original=transformToSynonyms(data)
                 res={}
                 try:
-                    res,plagCount,total,mostProbable=checkPlag(data)
+                    res,plagCount,total,mostProbable=checkPlagNormal(data)
                     # print(res)
                     return render_template('displayIntelligent.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable,original=original)
                 except:
@@ -126,7 +126,7 @@ def intelligentTextdata():
         data,original=transformToSynonyms(data)
         res={}
         try:
-            res,plagCount,total,mostProbable=checkPlag(data)
+            res,plagCount,total,mostProbable=checkPlagNormal(data)
             # print(res)
             return render_template('displayIntelligent.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable,original=original)
         except:
