@@ -19,8 +19,28 @@
   </head>
   <body>
 
-   
+    <div id="loading" class="loading" onClick="hideSpinner()">
+      Loading&#8230;     
+    </div>
+
     <div class="header">
+
+      <div class="grad-bar"></div>
+<div class="header-real">
+      <div class="menu-toggle" id="hamburger">
+        <i class="fas fa-bars"></i>
+    </div>
+    <div class="overlay"></div>
+    <div class="container">
+        <nav>
+            <h1 class="brand"><a href="index.html" style="text-decoration: none; color: rgb(9, 31, 102);"><span id="blink">No</span>_Nokol</a></h1>
+            <ul>
+                <li><a href="/" class="link-styles">Non-Assamese Plag-Check</a></li>
+                <li><a href="/intelligent" class="link-styles">Intelligent Plag-Check</a></li>
+            </ul>
+        </nav>
+    </div>
+  </div>
 
       <!--Content before waves-->
       <div class="inner-header flex">
@@ -28,7 +48,7 @@
           <div class="row">
             <div class="col">
               <div class="mb-3 mt-3">
-                <h2 class="mb-3" style="font-weight: 300">অসমীয়া</h2>
+                <h2 class="mb-3" style="font-weight: 300; margin-top: -100px;">অসমীয়া</h2>
                 <form action="/assamese" method="POST" enctype="multipart/form-data">
                   <div class="form-group">
                     <label class="form-label custom-file-label" for="formFileLg >Select file</label>
@@ -41,7 +61,7 @@
                       <progress class="d-none" id="progress" value="0" max="100"> </progress>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary" style="margin-right: 13px;">Start Checking</button>
+                  <button type="submit" class="btn btn-primary" style="margin-left:-95px; margin-right: 13px;" id="saveBtn" onClick="showSpinner()">Start Checking</button>
                   <a href="javascript:location.reload(true)">
                     <span class="glyphicon"></span><img src="/static/assets/reload.gif" alt="refresh button" height="36px" width="55px">
                   </a>
@@ -50,17 +70,17 @@
                   </a>
                 </form> 
             </div>
-            <div style="margin-top: 12px;">
-              <a href="/" style="color: white;">Non-Assamese Plag Check</a></div>
+            <div class="buffer">
+              <a href="/"></a></div>
             </div>
         </div>
       </div>
 
-      <div class="alert alert-warning d-none mb-3 mt-3" id="alert-modal"><span style="font-weight: bolder; color:red">WARNING!</span> File size greater than 10mb not allowed.</div>
+      <div class="alert alert-warning d-none mb-3 mt-3" id="alert-modal"><span style="font-weight: bolder; color:red">WARNING!</span> File size greater than 20mb not allowed.</div>
 
       <div class="alert alert-success d-none mb-3 mt-3" id="alert-modal-ext"><span style="font-weight: bolder; color:seagreen">INFO!</span> File extension allowed are: .DOC |.TXT |.PDF| .ODT</div>
 
-      <div class="alert alert-success mb-3 mt-3" id="alert-modal-sentence"><span style="font-weight: bolder; color:seagreen">INFO!</span> The assamese plag check feature works upto 5000 characters</div>
+      <div class="alert alert-success mb-1 mt-1" id="alert-modal-sentence"><span style="font-weight: bolder; color:seagreen;">INFO!</span> The assamese plag check feature works upto 5000 characters</div>
 
       
       <!--Waves Container-->
@@ -113,6 +133,7 @@
   ></script>
   <script src="{{ url_for('static', filename='app.js') }}"></script>
   <script src="{{ url_for('static', filename='voice.js') }}"></script>
+  <script src="{{ url_for('static', filename='navbar.js') }}"></script>
 
   </body>
 </html>

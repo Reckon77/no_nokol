@@ -47,7 +47,7 @@ fileUploader.onchange = () => {
         const fsize = fileUploader.files.item(i).size;
         const filesize = Math.round((fsize / 1024));
         // The size of the file.
-        if (filesize >= 10240) {
+        if (filesize >= 20480) {
          
          
           alertModal.classList.remove("d-none");
@@ -74,4 +74,15 @@ fileUploader.onchange = () => {
 
 function eraseText() {
   document.getElementById("output").value = "";
+}
+
+
+var loadingDiv = document.getElementById('loading');
+
+function showSpinner() {
+  loadingDiv.style.visibility = 'visible';
+}
+
+function hideSpinner() {
+  loadingDiv.style.visibility = 'hidden';
 }

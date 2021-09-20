@@ -7,7 +7,7 @@ from modules import *
 app = Flask(__name__)
 UPLOADS_PATH = join(dirname(realpath(__file__)), 'static/uploads/')
 app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
-app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024 #File size limit 10mb
+app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024 #File size limit 20mb
 
 
 @app.route("/", methods=["GET", "POST"])
