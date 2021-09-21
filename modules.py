@@ -1,4 +1,6 @@
+#Importing required libs
 import re
+#Tika is used to import text data from pdf,docx,txt files
 from tika import parser
 import tika
 tika.initVM()
@@ -9,59 +11,63 @@ load_dotenv()
 API_KEY=os.getenv("API_KEY")
 LOCATION=os.getenv("LOCATION")
 
-#translation
+#function to translate assamese into english (Microsoft Translation API)
 import requests, uuid, json
 def translate(text):
     # Add your subscription key and endpoint
     subscription_key = API_KEY
     endpoint = "https://api.cognitive.microsofttranslator.com"
-
     # Add your location, also known as region. The default is global.
     # This is required if using a Cognitive Services resource.
     location = LOCATION
-
     path = '/translate'
     constructed_url = endpoint + path
-
     params = {
         'api-version': '3.0',
         'from': 'as',
         'to': ['en']
     }
     constructed_url = endpoint + path
-
     headers = {
         'Ocp-Apim-Subscription-Key': subscription_key,
         'Ocp-Apim-Subscription-Region': location,
         'Content-type': 'application/json',
         'X-ClientTraceId': str(uuid.uuid4())
     }
-
 # You can pass more than one object in body.
     body = [{
         'text': text
     }]
-
     request = requests.post(constructed_url, params=params, headers=headers, json=body)
     response = request.json()
     return response[0]['translations'][0]['text']
+
+#function to extract the english text data from files and return it
 def extractText(path):
+    #extract
     raw = parser.from_file(path)
     data=raw['content']
+    #remove extra space
     data = " ".join(data.split())
+    #remove links
     data = re.sub(r'http\S+', '', data)
+    #break into sentences
     data=data.split('. ') 
+    #return array of sentences
     return data
+#function to extract the assamese text data from files and return it
 def extractAssameseText(path):
     raw = parser.from_file(path)
     data=raw['content']
     data = " ".join(data.split())
     data = re.sub(r'http\S+', '', data)
+    #since MS API support translation upto 5000 characters only
     if len(data)>=5000:
         raise "text limit exceeded"
     translatedData=translate(data)
     translatedData=translatedData.split('. ')
     return translatedData,data
+#function to extract the assamese text data from text area input and return it
 def inputAssameseDataExtract(data):
     data = " ".join(data.split())
     data = re.sub(r'http\S+', '', data)
@@ -70,11 +76,13 @@ def inputAssameseDataExtract(data):
     translatedData=translate(data)
     translatedData=translatedData.split('. ')
     return translatedData,data
+#function to extract the english text data from text area input and return it
 def inputDataExtract(textData):
     textData=" ".join(textData.split())
     textData = re.sub(r'http\S+', '', textData)
     textData=textData.split('. ') 
     return textData
+#file validation function
 def allowed_file(filename):
 
     # We only want files with a . in the filename
@@ -95,29 +103,12 @@ def allowed_file(filename):
 
 # Scrapper
 from bs4 import BeautifulSoup
-
-# def findPlag(text):
-#     text = text.replace(" ","+")
-#     # print(text)
-#     url = f'https://www.bing.com/search?q="{text}"&qs=n&form=QBRE&sp=-1&pq={text.lower()}"' # f'https://www.google.com?q="{text}&oq={text}&sourceid=chrome&ie=UTF-8"'  # "https://dataquestio.github.io/web-scraping-pages/simple.html"
-#     # Crafting the proper request to fool Google
-#     header = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'}
-#     page = requests.get(url, headers= header, allow_redirects=True)
-#     content = BeautifulSoup(page.content, 'html.parser')
-#     # print(content.prettify())
-#     # return content
-#     # link= content.find('h2')
-#     try:
-#         element=content.find('li',class_='b_algo').h2
-#         link= element.find('a')['href']
-#         return link
-#     except:
-#         return ""
+#function that return a link if exact match of the query is found
 def findPlag(text):
     #text = text.replace(" ","+")
     # print(text)
-    url = f'https://www.bing.com/search?q=%2B"{text}"&qs=n&form=QBRE&sp=-1&pq=%2B"{text.lower()}"' # f'https://www.google.com?q="{text}&oq={text}&sourceid=chrome&ie=UTF-8"'  # "https://dataquestio.github.io/web-scraping-pages/simple.html"
-    # Crafting the proper request to fool Google
+    url = f'https://www.bing.com/search?q=%2B"{text}"&qs=n&form=QBRE&sp=-1&pq=%2B"{text.lower()}"'
+    # Crafting the proper request 
     header = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'}
     page = requests.get(url, headers= header, allow_redirects=True)
     content = BeautifulSoup(page.content, 'html.parser')
@@ -130,11 +121,11 @@ def findPlag(text):
         return link
     except:
         return ""
+#function that return a link for relevant match of the query is found
 def findPlagNormal(text):
     #text = text.replace(" ","+")
     # print(text)
-    url = f'https://www.bing.com/search?q="{text}"&qs=n&form=QBRE&sp=-1&pq="{text.lower()}"' # f'https://www.google.com?q="{text}&oq={text}&sourceid=chrome&ie=UTF-8"'  # "https://dataquestio.github.io/web-scraping-pages/simple.html"
-    # Crafting the proper request to fool Google
+    url = f'https://www.bing.com/search?q="{text}"&qs=n&form=QBRE&sp=-1&pq="{text.lower()}"' 
     header = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'}
     page = requests.get(url, headers= header, allow_redirects=True)
     content = BeautifulSoup(page.content, 'html.parser')
@@ -147,6 +138,9 @@ def findPlagNormal(text):
         return link
     except:
         return ""
+
+#function that takes array of sentences as input and returns associated links, plagiarism count
+#total sentences, mostProbable sentences using exact match function
 from collections import defaultdict,Counter
 def checkPlag(data):
     res={}
@@ -164,7 +158,8 @@ def checkPlag(data):
     k = Counter(websites)
     mostProbable = k.most_common(3)
     return res,plagCount,total,mostProbable
-
+#function that takes array of sentences as input and returns associated links, plagiarism count
+#total sentences, mostProbable sentences using relevant match function
 def checkPlagNormal(data):
     res={}
     websites=defaultdict(int)
@@ -186,18 +181,21 @@ import nltk
 from nltk.corpus import wordnet
 from nltk.corpus import brown
 freqs = nltk.FreqDist(w.lower() for w in brown.words())
-
+#function that takes a word as input and returns the most common synonym
+#if the word is a noun or adjective
 def findSynonym(word):
     synonyms = []
     if len(word)==0:
         return ""
     wordList=[]
     wordList.append(word)
+    #checking for noun or adjective (NLTK POS tagging)
     tagged = nltk.pos_tag(wordList)
     allowed=["NN","NNS","JJ","JJR","JJS"]
     POS=tagged[0][1]
     if POS not in allowed:
         return word
+    #getting all the synonyms of a word
     for syn in wordnet.synsets(word):
         for l in syn.lemmas():
             synonyms.append(l.name())
@@ -207,6 +205,7 @@ def findSynonym(word):
     synonyms=list(synonyms)
     maxFreq=freqs[synonyms[0]]
     wrd=synonyms[0]
+    #getting the synonym with maximum frequency using brown corpus of NLTK
     for synWord in synonyms:
         if freqs[synWord]>maxFreq:
             wrd=synWord
@@ -216,7 +215,7 @@ def findSynonym(word):
     if word[0].isupper():
         return wrd.capitalize()
     return wrd
-
+# function to apply the findSynonym() function in a sentence and return it
 def transformSentence(text):
     text = nltk.word_tokenize(text)
     synonyms=[]
@@ -233,7 +232,7 @@ def transformSentence(text):
             res2 = res2[:-1]
         res2+=res[x]
     return res2
-
+# function to apply the transformSentence(text) function in an array of sentences and return it
 def transformToSynonyms(data):
     synonymSentences=[]
     for s in data:
