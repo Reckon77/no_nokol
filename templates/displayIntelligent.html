@@ -18,7 +18,7 @@
   </head>
   <body class="background-1">
     <div class="eleven card">
-      <h1 class="title">Extracted Sentences</h1>
+      <h1 class="title">Plagiarism report</h1>
       <h5>
         <span id="plagCount">{{plagCount}}</span> out of
         <span id="totalSentences"> {{total}}</span> sentences plagiarised
@@ -31,12 +31,12 @@
       {% endfor %} {% endif %}
     </div>
     <div class="container">
-      <table class="results">
+      <table class="results my-3">
         {% for sentence, src in res.items() %} {% if src == "" %}
         <tr>
           <td style="color: rgb(0, 255, 0)">
-            Transformed : {{ sentence }}
-            <p style="color: white;">Original : {{original[loop.index0]}}</p>
+            &roarr; Transformed : {{ sentence }}
+            <p style="color: black">Original : {{original[loop.index0]}}</p>
           </td>
           <td class="orignalSentence unselect fourth">Unselect</td>
         </tr>
@@ -44,13 +44,30 @@
         {% else %}
         <tr>
           <td style="color: red">
-            Transformed : {{ sentence }} : <a href=" {{ src }}">Source</a>
-            <p style="color: white;">Original : {{original[loop.index0]}}</p>
+            &roarr; Transformed : {{ sentence }} :
+            <a href=" {{ src }}">Probable source</a>
+            <p style="color: black">Original : {{original[loop.index0]}}</p>
           </td>
           <td class="btn-sm plagiarisedSentence unselect fourth">Unselect</td>
         </tr>
         {% endif %} {% endfor %}
       </table>
+    </div>
+    <div class="container my-2 d-flex flex-column align-items-center">
+      <h5 class="my-1">Document view</h5>
+      <p style="font-weight: bold; line-height: 1.6">
+        {% for sentence, src in res.items() %} {% if src == "" %}
+        <span style="color: rgb(0, 255, 0)"> {{original[loop.index0]}}. </span>
+        {% else %}
+        <span style="color: rgb(255, 0, 0)"> {{original[loop.index0]}}. </span>
+        {% endif %} {% endfor %}
+      </p>
+      <div>
+        <button onclick="window.print()" class="btn btn-sm btn-primary">
+          Print report
+        </button>
+        <a href="/" class="btn btn-sm btn-success">Home</a>
+      </div>
     </div>
 
     <script src="{{ url_for('static', filename='display.js') }}"></script>

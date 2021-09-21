@@ -137,4 +137,4 @@ def too_large(e):
     return "File size is too large.", 413
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
