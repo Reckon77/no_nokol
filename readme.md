@@ -37,9 +37,9 @@ A web application to check if a documents contents are plagiarised with multiple
   - Werkzeug==2.0.1
 
 ## Folder Structure
-* [Static/](https://github.com/Reckon77/no_nokol/tree/main/static) : Contains views functionallity logics script and styles.
+* [Static/](https://github.com/Reckon77/no_nokol/tree/main/static) : Contains views functionallity logics, script and styles.
 * [Templates/](https://github.com/Reckon77/no_nokol/tree/main/templates) : Contains html files for rendering on views.
-* [app.py](https://github.com/Reckon77/no_nokol/blob/main/app.py) : Main script file for unning FLask application.
+* [app.py](https://github.com/Reckon77/no_nokol/blob/main/app.py) : Main script file for running FLask application.
 * [modules.py](https://github.com/Reckon77/no_nokol/blob/main/modules.py) : Consists of scrapper logic and required modules like tikka logic for extracting text.
   
 
