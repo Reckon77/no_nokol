@@ -72,9 +72,7 @@ fileUploader.onchange = () => {
 }
 
 
-function eraseText() {
-  document.getElementById("output").value = "";
-}
+
 
 
 var loadingDiv = document.getElementById('loading');
@@ -83,6 +81,3 @@ function showSpinner() {
   loadingDiv.style.visibility = 'visible';
 }
 
-function hideSpinner() {
-  loadingDiv.style.visibility = 'hidden';
-}

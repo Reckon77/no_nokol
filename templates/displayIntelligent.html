@@ -34,7 +34,7 @@
       <table class="results my-3">
         {% for sentence, src in res.items() %} {% if src == "" %}
         <tr>
-          <td style="color: rgb(0, 255, 0)">
+          <td style="color: rgb(0, 98, 0)">
             &roarr; Transformed : {{ sentence }}
             <p style="color: black">Original : {{original[loop.index0]}}</p>
           </td>
@@ -57,7 +57,7 @@
       <h5 class="my-1">Document view</h5>
       <p style="font-weight: bold; line-height: 1.6">
         {% for sentence, src in res.items() %} {% if src == "" %}
-        <span style="color: rgb(0, 255, 0)"> {{original[loop.index0]}}. </span>
+        <span style="color: rgb(0, 98, 0)"> {{original[loop.index0]}}. </span>
         {% else %}
         <span style="color: rgb(255, 0, 0)"> {{original[loop.index0]}}. </span>
         {% endif %} {% endfor %}
