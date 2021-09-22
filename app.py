@@ -7,7 +7,6 @@ from modules import *
 import shutil
 #flask config
 app = Flask(__name__)
-
 #setting the absolute path for file upload folder
 path_file = os.getcwd() #Gets current working directory path
 path_final_name = path_file + '/static/uploads/'
