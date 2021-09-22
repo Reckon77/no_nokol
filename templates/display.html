@@ -16,89 +16,74 @@
       href="{{ url_for('static', filename='style.css') }}"
     />
   </head>
-  <body class="background-1">
-    <div class="eleven card">
-      <h1 class="title">Plagiarism report</h1>
-      <h5>
-        <span id="plagCount">{{plagCount}}</span> out of
-        <span id="totalSentences"> {{total}}</span> sentences plagiarised
-      </h5>
-      <h5><span id="plagPercent">0</span> % plagiarised</h5>
-      {% if mostProbable|length > 0 %}
-      <p>Most Probable Sources</p>
-      {% for sites in mostProbable %}
-      <li>
-        <a href="{{sites[0]}}" style="word-wrap: break-word">{{sites[0]}}</a>
-      </li>
-      {% endfor %} {% endif %}
-    </div>
-    {% if assameseData|length > 0 %}
-    <div
-      class="
-        container
-        my-3
-        d-flex
-        flex-column
-        align-items-center
-        justify-content-center
-      "
-    >
-      <h3>Assamese text</h3>
-      <p class="fw-bold">{{assameseData}}</p>
-    </div>
-
-    {% endif %}
-    <!-- <ul>
-      {% for sentence, src in res.items() %} {% if src == "" %}
-      <li style="color: rgb(0, 255, 0)">
-        {{ sentence }}
-        <button class="btn btn-danger btn-sm orignalSentence">Unselect</button>
-      </li>
-      {% else %}
-      <li style="color: red" class="blink-hard">
-        {{ sentence }}: <a href=" {{ src }}">Source</a>
-        <button class="btn btn-danger btn-sm plagiarisedSentence">
-          Unselect
-        </button>
-      </li>
-
-      {% endif %} {% endfor %}
-    </ul> -->
-    <div class="container">
-      <table class="results my-3">
-        {% for sentence, src in res.items() %} {% if src == "" %}
-        <tr>
-          <td style="color: rgb(0, 255, 0)">&roarr; {{ sentence }}</td>
-          <td class="orignalSentence unselect fourth">Unselect</td>
-        </tr>
-
-        {% else %}
-        <tr>
-          <td style="color: red">
-            &roarr; {{ sentence }} : <a href=" {{ src }}">Probable source</a>
-          </td>
-          <td class="btn-sm plagiarisedSentence unselect fourth">Unselect</td>
-        </tr>
-        {% endif %} {% endfor %}
-      </table>
-    </div>
-    <div class="container my-2 d-flex flex-column align-items-center">
-      <h5 class="my-1">Document view</h5>
-      <p style="font-weight: bold; line-height: 1.6">
-        {% for sentence, src in res.items() %} {% if src == "" %}
-        <span style="color: rgb(0, 255, 0)"> {{ sentence }}. </span>
-        {% else %}
-        <span style="color: rgb(255, 0, 0)"> {{ sentence }}. </span>
-        {% endif %} {% endfor %}
-      </p>
-      <div>
-        <button onclick="window.print()" class="btn btn-sm btn-primary">
-          Print report
-        </button>
-        <a href="/" class="btn btn-sm btn-success">Home</a>
+    <body class="background-1">
+      <div class="eleven card">
+        <h1 class="title">Plagiarism report</h1>
+        <h5>
+          <span id="plagCount">{{plagCount}}</span> out of
+          <span id="totalSentences"> {{total}}</span> sentences plagiarised
+        </h5>
+        <h5><span id="plagPercent">0</span> % plagiarised</h5>
+        {% if mostProbable|length > 0 %}
+        <p>Most Probable Sources</p>
+        {% for sites in mostProbable %}
+        <li>
+          <a href="{{sites[0]}}" style="word-wrap: break-word">{{sites[0]}}</a>
+        </li>
+        {% endfor %} {% endif %}
       </div>
-    </div>
 
-    <script src="{{ url_for('static', filename='display.js') }}"></script>
-  </body>
+      {% if assameseData|length > 0 %}
+      <div class="
+          container
+          my-3
+          d-flex
+          flex-column
+          align-items-center
+          justify-content-center
+        "
+      >
+        <h3>Assamese text</h3>
+        <p class="fw-bold">{{assameseData}}</p>
+      </div>
+
+      {% endif %}
+      <div class="container">
+        <table class="results my-3">
+          {% for sentence, src in res.items() %} {% if src == "" %}
+          <tr>
+            <td style="color: rgb(0, 98, 0)">&roarr; {{ sentence }}</td>
+            <td class="orignalSentence unselect fourth">Unselect</td>
+          </tr>
+
+          {% else %}
+          <tr>
+            <td style="color: red">
+              &roarr; {{ sentence }} : <a href=" {{ src }}">Probable source</a>
+            </td>
+            <td class="btn-sm plagiarisedSentence unselect fourth">Unselect</td>
+          </tr>
+          {% endif %} {% endfor %}
+        </table>
+      </div>
+      
+      <div class="container my-2 d-flex flex-column align-items-center">
+        <h5 class="my-1">Document view</h5>
+        <p style="font-weight: bold; line-height: 1.6">
+          {% for sentence, src in res.items() %} {% if src == "" %}
+          <span style="color: rgb(0, 98, 0)"> {{ sentence }}. </span>
+          {% else %}
+          <span style="color: rgb(255, 0, 0)"> {{ sentence }}. </span>
+          {% endif %} {% endfor %}
+        </p>
+        <div>
+          <button onclick="window.print()" class="btn btn-sm btn-primary">
+            Print report
+          </button>
+          <a href="/" class="btn btn-sm btn-success">Home</a>
+        </div>
+      </div>
+
+      <script src="{{ url_for('static', filename='display.js') }}"></script>
+    </body>
 </html>
