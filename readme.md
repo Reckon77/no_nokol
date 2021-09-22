@@ -1,6 +1,6 @@
 # NO_NOKOL Plagiarism-Checker
 
-A web application to check if a documents contents are plagiarised with multiple options availaible based on the requirements.
+A web application to check if a documents contents are plagiarised with multiple options availaible based upon the requirements.
 
 ## How it works
 * Based on the requirements there are three approaches to this project.
@@ -12,7 +12,7 @@ A web application to check if a documents contents are plagiarised with multiple
 * Finally the most probable source is displayed on views with information showning plagiarised percentage and sentences.
 
 ## Required Libraries
-* The project uses tikka module to extract text from files.
+* The project uses tika module to extract text from files.
 * Other required libraries are:
   - beautifulsoup4==4.10.0
   - bs4==0.0.1
@@ -37,10 +37,10 @@ A web application to check if a documents contents are plagiarised with multiple
   - Werkzeug==2.0.1
 
 ## Folder Structure
-* [Static/](https://github.com/Reckon77/no_nokol/tree/main/static) : Contains views functionallity logics script and styles.
+* [Static/](https://github.com/Reckon77/no_nokol/tree/main/static) : Contains views functionallity logics, script and styles.
 * [Templates/](https://github.com/Reckon77/no_nokol/tree/main/templates) : Contains html files for rendering on views.
-* [app.py](https://github.com/Reckon77/no_nokol/blob/main/app.py) : Main script file for unning FLask application.
-* [modules.py](https://github.com/Reckon77/no_nokol/blob/main/modules.py) : Consists of scrapper logic and required modules like tikka logic for extracting text.
+* [app.py](https://github.com/Reckon77/no_nokol/blob/main/app.py) : Main script file for running FLask application.
+* [modules.py](https://github.com/Reckon77/no_nokol/blob/main/modules.py) : Consists of scrapper logic and required modules like tika logic for extracting text.
   
 
 
