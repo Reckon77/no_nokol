@@ -64,6 +64,8 @@ def textdata():
         try:
             #getting the text data
             data = request.form["input"]
+            if data == "":
+                return render_template('error.html')
             #breaking it into sentences
             data = inputDataExtract(data)
             res={}
@@ -114,6 +116,8 @@ def assameseText():
     if request.method=='POST':
         try:
             data = request.form["input"]
+            if data == "":
+                return render_template('error.html')
             data,assameseData= inputAssameseDataExtract(data)
             # print(data)
             res={}
@@ -137,7 +141,7 @@ def intelligent():
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 path=f"./static/uploads/{filename}"
                 data=extractText(path)
-                 #getting the synonym transformed sentences
+                #getting the synonym transformed sentences
                 # data,original=transformToSynonyms(data)
                 res={}
                 try:
@@ -166,6 +170,8 @@ def intelligentTextdata():
     if request.method=='POST':
         try:
             data = request.form["input"]
+            if data == "":
+                return render_template('error.html')
             data = inputDataExtract(data)
             #getting the synonym transformed sentences
             # data,original=transformToSynonyms(data)
