@@ -138,14 +138,14 @@ def intelligent():
                 path=f"./static/uploads/{filename}"
                 data=extractText(path)
                  #getting the synonym transformed sentences
-                data,original=transformToSynonyms(data)
+                # data,original=transformToSynonyms(data)
                 res={}
                 try:
                     if os.path.exists(path_final_name):
                         shutil.rmtree(path_final_name)
-                    res,plagCount,total,mostProbable=checkPlagNormal(data)
+                    res,plagCount,total,mostProbable=checkPlagIntelligent(data)
                     # print(res)
-                    return render_template('displayIntelligent.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable,original=original)
+                    return render_template('displayIntelligent.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
                 except:
                     if os.path.exists(path_final_name):
                         shutil.rmtree(path_final_name)
@@ -168,11 +168,11 @@ def intelligentTextdata():
             data = request.form["input"]
             data = inputDataExtract(data)
             #getting the synonym transformed sentences
-            data,original=transformToSynonyms(data)
+            # data,original=transformToSynonyms(data)
             res={}
-            res,plagCount,total,mostProbable=checkPlagNormal(data)
+            res,plagCount,total,mostProbable=checkPlagIntelligent(data)
             # print(res)
-            return render_template('displayIntelligent.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable,original=original)
+            return render_template('displayIntelligent.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
         except:
             return render_template('error.html')
 

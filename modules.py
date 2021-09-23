@@ -238,3 +238,21 @@ def transformToSynonyms(data):
     for s in data:
         synonymSentences.append(transformSentence(s))
     return synonymSentences,data
+
+def checkPlagIntelligent(data):
+    res={}
+    websites=defaultdict(int)
+    plagCount=0
+    total=0
+    for sentence in data:
+        tranformedText=transformSentence(sentence)
+        link=findPlagNormal(tranformedText)
+        res[sentence]=[tranformedText,link]
+        total+=1
+        if link!='':
+            websites[link]+=1
+        if res[sentence][1]!='':
+            plagCount+=1
+    k = Counter(websites)
+    mostProbable = k.most_common(3)
+    return res,plagCount,total,mostProbable

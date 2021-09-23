@@ -32,11 +32,11 @@
     </div>
     <div class="container">
       <table class="results my-3">
-        {% for sentence, src in res.items() %} {% if src == "" %}
+        {% for sentence, src in res.items() %} {% if src[1] == "" %}
         <tr>
           <td style="color: rgb(0, 98, 0)">
-            &roarr; Transformed : {{ sentence }}
-            <p style="color: black">Original : {{original[loop.index0]}}</p>
+            &roarr; Transformed : {{ src[0] }}
+            <p style="color: black">Original : {{sentence}}</p>
           </td>
           <td class="orignalSentence unselect fourth">Unselect</td>
         </tr>
@@ -44,9 +44,9 @@
         {% else %}
         <tr>
           <td style="color: red">
-            &roarr; Transformed : {{ sentence }} :
-            <a href=" {{ src }}">Probable source</a>
-            <p style="color: black">Original : {{original[loop.index0]}}</p>
+            &roarr; Transformed : {{ src[0] }} :
+            <a href=" {{ src[1] }}">Probable source</a>
+            <p style="color: black">Original : {{sentence}}</p>
           </td>
           <td class="btn-sm plagiarisedSentence unselect fourth">Unselect</td>
         </tr>
@@ -56,10 +56,10 @@
     <div class="container my-2 d-flex flex-column align-items-center">
       <h5 class="my-1">Document view</h5>
       <p style="font-weight: bold; line-height: 1.6">
-        {% for sentence, src in res.items() %} {% if src == "" %}
-        <span style="color: rgb(0, 98, 0)"> {{original[loop.index0]}}. </span>
+        {% for sentence, src in res.items() %} {% if src[1] == "" %}
+        <span style="color: rgb(0, 98, 0)"> {{sentence}}. </span>
         {% else %}
-        <span style="color: rgb(255, 0, 0)"> {{original[loop.index0]}}. </span>
+        <span style="color: rgb(255, 0, 0)"> {{sentence}}. </span>
         {% endif %} {% endfor %}
       </p>
       <div>
