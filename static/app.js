@@ -81,3 +81,7 @@ function showSpinner() {
   loadingDiv.style.visibility = 'visible';
 }
 
+window.onload = () => {
+  console.log('page is fully loaded');
+  loadingDiv.style.visibility = 'hidden';
+};
