@@ -76,9 +76,11 @@ fileUploader.onchange = () => {
 
 
 var loadingDiv = document.getElementById('loading');
+const submitButton = document.getElementById('buttonBootstrap')
 
 function showSpinner() {
   loadingDiv.style.visibility = 'visible';
+  submitButton.style.color = 'black';
 }
 
 window.onload = () => {
