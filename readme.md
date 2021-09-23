@@ -62,6 +62,3 @@ LOCATION=yourLocation
 - [app.py](https://github.com/Reckon77/no_nokol/blob/main/app.py) : Main script file for running FLask application.
 - [modules.py](https://github.com/Reckon77/no_nokol/blob/main/modules.py) : Consists of scrapper logic and required modules like tika logic for extracting text.
 
-## License 
-
-This project is licensed under the [MIT License](https://github.com/Reckon77/no_nokol/blob/main/LICENSE).
