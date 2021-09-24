@@ -21,6 +21,7 @@ def index():
         if request.files:
             #getting the uploaded file
             file = request.files['file']
+            sourceFilter = request.form["sourceFilter"]
             if not os.path.exists(path_final_name):
                 os.mkdir(path_final_name)
             #empty file name returns error
@@ -41,7 +42,7 @@ def index():
                     if os.path.exists(path_final_name):
                         shutil.rmtree(path_final_name)
                     #getting the links and other attributes
-                    res,plagCount,total,mostProbable=checkPlag(data)
+                    res,plagCount,total,mostProbable=checkPlag(data,sourceFilter)
                     # print(res)
                     return render_template('display.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
                 except:
@@ -83,6 +84,7 @@ def assamese():
     if request.method == "POST":
         if request.files:
             file = request.files["file"]
+            sourceFilter = request.form["sourceFilter"]
             if not os.path.exists(path_final_name):
                 os.mkdir(path_final_name)
             if file.filename == "":
@@ -96,7 +98,7 @@ def assamese():
                 try:
                     if os.path.exists(path_final_name):
                         shutil.rmtree(path_final_name)
-                    res,plagCount,total,mostProbable=checkPlagNormal(data)
+                    res,plagCount,total,mostProbable=checkPlagNormal(data,sourceFilter)
                     # print(res)
                     return render_template('display.html',res=res,plagCount=plagCount,total=total,assameseData=assameseData,mostProbable=mostProbable)
                 except:
@@ -135,6 +137,7 @@ def intelligent():
     if request.method == "POST":
         if request.files:
             file = request.files['file']
+            sourceFilter = request.form["sourceFilter"]
             if not os.path.exists(path_final_name):
                 os.mkdir(path_final_name)
             if file.filename == "":
@@ -150,7 +153,7 @@ def intelligent():
                 try:
                     if os.path.exists(path_final_name):
                         shutil.rmtree(path_final_name)
-                    res,plagCount,total,mostProbable=checkPlagIntelligent(data)
+                    res,plagCount,total,mostProbable=checkPlagIntelligent(data,sourceFilter)
                     # print(res)
                     return render_template('displayIntelligent.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
                 except:

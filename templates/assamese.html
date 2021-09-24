@@ -65,6 +65,31 @@
                     <a href="#assamese-input">
                       <span class="glyphicon" style="position: absolute; color: white; margin-top: 9px; margin-left: 11px; font-size: 16.5px;">Text Input</span><img src="/static/assets/text.gif" alt="refresh button" height="45px" width="102px" style=" position: relative;">
                     </a>
+                     <!-- modal start -->
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-link link-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Add Source filter
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Source Filter (URL)</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p>The source filter URL will be excluded from the results</p>
+                          <input class="form-control form-control-sm" type="text" placeholder="Source filter URL (optional)" name="sourceFilter">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- modal-end -->
                   </form> 
               </div>
               <div class="buffer">
