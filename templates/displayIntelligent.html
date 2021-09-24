@@ -20,10 +20,10 @@
     <div class="eleven card">
       <h1 class="title">Plagiarism report</h1>
       <h5>
-        <span id="plagCount">{{plagCount}}</span> out of
+        <span id="plagCount" style="color: red">{{plagCount}}</span> out of
         <span id="totalSentences"> {{total}}</span> sentences plagiarised
       </h5>
-      <h5><span id="plagPercent">0</span> % plagiarised</h5>
+      <h5><span id="plagPercent" style="color: red">0</span> % plagiarised</h5>
       {% if mostProbable|length > 0 %}
       <p>Most Probable Sources</p>
       {% for sites in mostProbable %}
@@ -34,7 +34,7 @@
       <table class="results my-3">
         {% for sentence, src in res.items() %} {% if src[1] == "" %}
         <tr>
-          <td style="color: rgb(0, 98, 0)">
+          <td style="color: rgb(0, 255, 0)">
             &roarr; Transformed : {{ src[0] }}
             <p style="color: black">Original : {{sentence}}</p>
           </td>
@@ -57,7 +57,7 @@
       <h5 class="my-1">Document view</h5>
       <p style="font-weight: bold; line-height: 1.6">
         {% for sentence, src in res.items() %} {% if src[1] == "" %}
-        <span style="color: rgb(0, 98, 0)"> {{sentence}}. </span>
+        <span style="color: rgb(0, 255, 0)"> {{sentence}}. </span>
         {% else %}
         <span style="color: rgb(255, 0, 0)"> {{sentence}}. </span>
         {% endif %} {% endfor %}
