@@ -96,9 +96,10 @@
           How it works: English plagiarism checker breaks the document into sentences and looks for matches of those sentences on the web.
         </div>
         <form action="/textdata" method="POST">
+          <input class="form-control form-control-sm" type="text" placeholder="Source filter URL (optional)" name="sourceFilter">
           <textarea
           id='output'
-          style="margin-top: 50px ;"
+          style="margin-top: 20px;"
             name="input"
             class="form-control textArea"
             rows="10"

@@ -64,13 +64,15 @@ def textdata():
         try:
             #getting the text data
             data = request.form["input"]
+            sourceFilter = request.form["sourceFilter"]
             if data == "":
                 return render_template('error.html')
             #breaking it into sentences
             data = inputDataExtract(data)
             res={}
             #getting the links
-            res,plagCount,total,mostProbable=checkPlag(data)
+            res,plagCount,total,mostProbable=checkPlag(data,sourceFilter)
+           
             # print(res)
             return render_template('display.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
         except:
@@ -116,12 +118,13 @@ def assameseText():
     if request.method=='POST':
         try:
             data = request.form["input"]
+            sourceFilter = request.form["sourceFilter"]
             if data == "":
                 return render_template('error.html')
             data,assameseData= inputAssameseDataExtract(data)
             # print(data)
             res={}
-            res,plagCount,total,mostProbable=checkPlagNormal(data)
+            res,plagCount,total,mostProbable=checkPlagNormal(data,sourceFilter)
             # print(res)
             return render_template('display.html',res=res,plagCount=plagCount,total=total,assameseData=assameseData,mostProbable=mostProbable)
         except:
@@ -170,13 +173,15 @@ def intelligentTextdata():
     if request.method=='POST':
         try:
             data = request.form["input"]
+            sourceFilter = request.form["sourceFilter"]
+            print(sourceFilter)
             if data == "":
                 return render_template('error.html')
             data = inputDataExtract(data)
             #getting the synonym transformed sentences
             # data,original=transformToSynonyms(data)
             res={}
-            res,plagCount,total,mostProbable=checkPlagIntelligent(data)
+            res,plagCount,total,mostProbable=checkPlagIntelligent(data,sourceFilter)
             # print(res)
             return render_template('displayIntelligent.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
         except:

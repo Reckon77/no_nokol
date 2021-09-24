@@ -104,7 +104,7 @@ def allowed_file(filename):
 # Scrapper
 from bs4 import BeautifulSoup
 #function that return a link if exact match of the query is found
-def findPlag(text):
+def findPlag(text,sourceFilter=""):
     #text = text.replace(" ","+")
     # print(text)
     url = f'https://www.bing.com/search?q=%2B"{text}"&qs=n&form=QBRE&sp=-1&pq=%2B"{text.lower()}"'
@@ -118,11 +118,14 @@ def findPlag(text):
     try:
         element=content.find('li',class_='b_algo').h2
         link= element.find('a')['href']
-        return link
+        if link == sourceFilter:
+            return ""
+        else:
+            return link
     except:
         return ""
 #function that return a link for relevant match of the query is found
-def findPlagNormal(text):
+def findPlagNormal(text,sourceFilter=""):
     #text = text.replace(" ","+")
     # print(text)
     url = f'https://www.bing.com/search?q="{text}"&qs=n&form=QBRE&sp=-1&pq="{text.lower()}"' 
@@ -135,6 +138,10 @@ def findPlagNormal(text):
     try:
         element=content.find('li',class_='b_algo').h2
         link= element.find('a')['href']
+        if link == sourceFilter:
+            return ""
+        else:
+            return link
         return link
     except:
         return ""
@@ -142,13 +149,13 @@ def findPlagNormal(text):
 #function that takes array of sentences as input and returns associated links, plagiarism count
 #total sentences, mostProbable sentences using exact match function
 from collections import defaultdict,Counter
-def checkPlag(data):
+def checkPlag(data,sourceFilter=""):
     res={}
     websites=defaultdict(int)
     plagCount=0
     total=0
     for sentence in data:
-        link=findPlag(sentence)
+        link=findPlag(sentence,sourceFilter)
         res[sentence]=link
         total+=1
         if link!='':
@@ -160,13 +167,13 @@ def checkPlag(data):
     return res,plagCount,total,mostProbable
 #function that takes array of sentences as input and returns associated links, plagiarism count
 #total sentences, mostProbable sentences using relevant match function
-def checkPlagNormal(data):
+def checkPlagNormal(data,sourceFilter=""):
     res={}
     websites=defaultdict(int)
     plagCount=0
     total=0
     for sentence in data:
-        link=findPlagNormal(sentence)
+        link=findPlagNormal(sentence,sourceFilter)
         res[sentence]=link
         total+=1
         if link!='':
@@ -239,14 +246,14 @@ def transformToSynonyms(data):
         synonymSentences.append(transformSentence(s))
     return synonymSentences,data
 
-def checkPlagIntelligent(data):
+def checkPlagIntelligent(data,sourceFilter=""):
     res={}
     websites=defaultdict(int)
     plagCount=0
     total=0
     for sentence in data:
         tranformedText=transformSentence(sentence)
-        link=findPlagNormal(tranformedText)
+        link=findPlagNormal(tranformedText,sourceFilter)
         res[sentence]=[tranformedText,link]
         total+=1
         if link!='':
