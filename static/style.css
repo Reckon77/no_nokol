@@ -519,14 +519,22 @@ nav ul li a:hover::after {
   }
 }
 
-/* Brand glow
+
+/* Brand glow */
 #blink {
   -webkit-animation-name: blinker;
   -webkit-animation-iteration-count: infinite;
-  -webkit-animation-duration: 0.5s;
+  -webkit-animation-duration: 1s;
   font-family: lobster, cursive;
   text-align: center;
-} */
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
 
 /* Absolute Center Spinner */
 .loading {
