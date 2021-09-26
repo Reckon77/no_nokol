@@ -7,9 +7,11 @@ A web application to check if a documents contents are plagiarised with multiple
 1. run command "pip install -r requirements.txt"
 2. run command "python app.py" in the terminal
 
-### Note1 : Make sure that Java is installed in your machine to use the tika package
+#### Note1 : Make sure that python 3.8+ is installed in your system. Also installing Anaconda is recommended, if you don’t have Anaconda install yet, follow the steps provided on the [Anaconda installation page.](https://docs.anaconda.com/anaconda/install/windows/)
 
-### Note2 : To use the Assamese Plag-Check, follow these steps :
+#### Note2 : Make sure that Java is installed in your machine to use the tika package
+
+#### Note2 : To use the Assamese Plag-Check, follow these steps :
 
 1. Get your API key and location to use the Microsoft translation API ( refer [here](https://azure.microsoft.com/en-in/services/cognitive-services/translator/))
 2. Create a .env file and write this code (replace "yourAPIkey" and "yourLocation" with the one that you obtained in step i.)
