@@ -7,7 +7,7 @@ A web application to check if a documents contents are plagiarised with multiple
 1. run command "pip install -r requirements.txt"
 2. run command "python app.py" in the terminal
 
-#### Note1 : Make sure that python 3.8+ is installed in your system. Also installing Anaconda is recommended, if you don’t have &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Anaconda install yet, follow the steps provided on the [Anaconda installation page.](https://docs.anaconda.com/anaconda/install/windows/)
+#### Note1 : Make sure that python 3.8+ is installed in your system. Also installing Anaconda is recommended, if you don’t have Anaconda install yet, follow the steps provided on the [Anaconda installation page.](https://docs.anaconda.com/anaconda/install/windows/)
 
 #### Note2 : Make sure that Java is installed in your machine to use the tika package
 
