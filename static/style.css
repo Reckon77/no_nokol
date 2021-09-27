@@ -55,6 +55,7 @@ p {
   position: relative;
   width: 100%;
   height: 15vh;
+  /* margin-top: 80px;; */
   margin-bottom: -7px; /*Fix for safari gap*/
   min-height: 100px;
   max-height: 150px;
@@ -107,13 +108,19 @@ p {
   h1 {
     font-size: 24px;
   }
+  .responsive-margin {
+    margin-top: 150px;
+  }
+  .responsive-margin-bottom {
+    margin-bottom: 100px;
+  }
 }
 
 /* Progress bar styles */
 progress[value] {
   width: 300px;
   height: 14px;
-  margin: 50px auto;
+  margin: 20px auto;
   display: block;
   /* Important Thing */
   -webkit-appearance: none;
@@ -423,6 +430,7 @@ nav ul li a:hover::after {
 
 @media screen and (max-width: 1125px) {
   .menu-toggle {
+    position: fixed;
     display: block;
     z-index: 1000;
   }
@@ -446,6 +454,7 @@ nav ul li a:hover::after {
   }
 
   nav ul li a {
+    position: relative;
     margin: 0;
     font-size: 1rem;
   }
@@ -455,8 +464,13 @@ nav ul li a:hover::after {
   }
 
   .fas {
-    right: 0;
+    top: 20px;
+    right: 12px;
+    padding-left: 15px;
+    position: fixed;
   }
+
+  
 
   .overlay.menu-open,
   nav.menu-open {

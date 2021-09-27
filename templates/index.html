@@ -37,7 +37,7 @@
       </div>
 
       <!--Content before waves-->
-      <div class="inner-header flex">
+      <div class="inner-header flex responsive-margin">
         <div class="container">
           <div id="loading" class="loading">
             Loading&#8230;     
@@ -57,20 +57,32 @@
                       <progress class="d-none" id="progress" value="0" max="100"> </progress>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary" style="margin-left:-95px; margin-right: 13px;" id="saveBtn" onClick="showSpinner()">Start Checking</button>
-                  <a href="javascript:location.reload(true)">
-                    <span class="glyphicon"></span><img src="/static/assets/reload.gif" alt="refresh button" height="36px" width="55px">
-                  </a>
-                  <a href="#non-assamese" style="position: relative;">
-                    <span class="glyphicon" style=" z-index: 1; position: absolute;  white-space: nowrap ; color: white; margin-top: 9px; margin-left: 11px; font-size: 16.5px;">Text Input</span><img src="/static/assets/text.gif" alt="refresh button" height="45px" width="102px" style=" position: absolute;">
-                  </a>
+                  <div class="container-fluid">
+                      <button type="submit" class="btn btn-primary" style="margin-left:-95px; margin-right: 13px;" id="saveBtn" onClick="showSpinner()">Start Checking</button>
+                    <a href="javascript:location.reload(true)">
+                      <span class="glyphicon"></span><img src="/static/assets/reload.gif" alt="refresh button" height="36px" width="55px">
+                    </a>
+                    <a href="#non-assamese" style="position: relative;">
+                      <span class="glyphicon" style=" z-index: 1; position: absolute;  white-space: nowrap ; color: white; margin-top: 9px; margin-left: 11px; font-size: 16.5px;">Text Input</span><img src="/static/assets/text.gif" alt="refresh button" height="45px" width="102px" style=" position: absolute;">
+                    </a>
+                  </div>
 
-
-                  <!-- modal start -->
-                  <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-link link-dark" style="margin-left:6.2rem;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <button type="button" class="btn btn-link link-dark" style="margin-left:-1.3rem; margin-bottom: 15px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Add Source filter
                   </button>
+
+
+                  <div class="container-fluid responsive-margin-bottom">
+                    <div class="alert alert-warning d-none mb-3 mt-3" id="alert-modal"><span style="font-weight: bolder; color:red">WARNING!</span> File size greater than 20mb not allowed.</div>
+          
+                    <div class="alert alert-success d-none mb-3 mt-3" id="alert-modal-ext"><span style="font-weight: bolder; color:seagreen">INFO!</span> File extension allowed are: .DOC |.TXT |.PDF |.ODT</div>
+                  </div>
+                  
+                  <!-- modal start -->
+                  <!-- Button trigger modal -->
+                 
+
+          
 
                   <!-- Modal -->
                   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -96,9 +108,7 @@
             </div>
           </div>
         </div>
-        <div class="alert alert-warning d-none mb-3 mt-3" id="alert-modal"><span style="font-weight: bolder; color:red">WARNING!</span> File size greater than 20mb not allowed.</div>
 
-        <div class="alert alert-success d-none mb-3 mt-5" id="alert-modal-ext"><span style="font-weight: bolder; color:seagreen">INFO!</span> File extension allowed are: .DOC |.TXT |.PDF |.ODT</div>
 
       <!--Waves Container-->
       <div class="waves">
