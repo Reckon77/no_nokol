@@ -11,7 +11,7 @@ open.addEventListener("click", function(){
     overlay.classList.toggle("menu-open");
     nav.classList.toggle("menu-open");
 
-    if (changeIcon) {
+    if(changeIcon) {
         icon.classList.remove("fa-bars");
         icon.classList.add("fa-times");
         changeIcon = false;
