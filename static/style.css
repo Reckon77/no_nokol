@@ -519,9 +519,11 @@ nav ul li a:hover::after {
   }
 }
 
-
 /* Brand glow */
 #blink {
+  animation-name: blinker;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
   -webkit-animation-name: blinker;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-duration: 1s;
@@ -534,7 +536,6 @@ nav ul li a:hover::after {
     opacity: 0;
   }
 }
-
 
 /* Absolute Center Spinner */
 .loading {
