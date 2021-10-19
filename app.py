@@ -192,6 +192,72 @@ def intelligentTextdata():
         except:
             return render_template('error.html')
 
+#Assamese plag check route
+@app.route("/assamese", methods=["GET", "POST"])
+def assamese():
+    if request.method == "POST":
+        if request.files:
+            #getting the uploaded file
+            file = request.files['file']
+            sourceFilter = request.form["sourceFilter"]
+            if not os.path.exists(path_final_name):
+                os.mkdir(path_final_name)
+            #empty file name returns error
+            if file.filename == "":
+                return render_template('error.html')
+            #file validation
+            if allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                    #adding the file in the uploads folder
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    #getting the file path
+                path=f"./static/uploads/{filename}"
+                    #extracting text from data
+                data=extractAssameseText(path)
+                    # print(data)
+                res={}
+                try:
+                    if os.path.exists(path_final_name):
+                        shutil.rmtree(path_final_name)
+                    #getting the links and other attributes
+                    res,plagCount,total,mostProbable=checkPlag(data,sourceFilter)
+                    # print(res)
+                    return render_template('display.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
+                except:
+                    if os.path.exists(path_final_name):
+                        shutil.rmtree(path_final_name)
+                    return render_template('error.html')
+            else:
+                if os.path.exists(path_final_name):
+                        shutil.rmtree(path_final_name)
+                return render_template('error.html')
+        else:
+            if os.path.exists(path_final_name):
+                        shutil.rmtree(path_final_name)
+            return render_template('error.html')
+    return render_template('assamese.html')
+#Assamese text area post route
+@app.route('/assamesetext',methods=['POST'])
+def assamesetext():
+    if request.method=='POST':
+        try:
+            #getting the text data
+            data = request.form["input"]
+            sourceFilter = request.form["sourceFilter"]
+            if data == "":
+                return render_template('error.html')
+            #breaking it into sentences
+            data = assameseInputDataExtract(data)
+            res={}
+            #getting the links
+            res,plagCount,total,mostProbable=checkPlag(data,sourceFilter)
+           
+            # print(res)
+            return render_template('display.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
+        except:
+            return render_template('error.html')
+
+
 @app.errorhandler(413)
 def too_large(e):
     return "File size is too large.", 413

@@ -65,6 +65,18 @@ def extractText(path):
     # data=data.split('. ') 
     #return array of sentences
     return data
+#Extract and tokenize assamese text
+def extractAssameseText(path):
+    #extract
+    data=extractData(path)
+    #clean
+    data = cleanData(data)
+    #break into sentences
+    data=data.split('। ')
+    # data=data.split('. ') 
+    #return array of sentences
+    return data
+
 #function to extract the multilingual text data from files and return it
 def extractMultilingualText(path,language):
     data=extractData(path)
@@ -86,11 +98,18 @@ def inputMultilingualDataExtract(data,language):
     # translatedData=translatedData.split('. ')
     return translatedData,data
 #function to extract the english text data from text area input and return it
-def inputDataExtract(textData):
+def inputDataExtract(data):
     data = cleanData(data)
     data=sent_tokenize(data)
     # textData=textData.split('. ') 
-    return textData
+    return data
+def assameseInputDataExtract(data):
+    data = cleanData(data)
+    # data=sent_tokenize(data)
+    data=data.split('। ') 
+    # print(data)
+    return data
+
 #file validation function
 def allowed_file(filename):
 
