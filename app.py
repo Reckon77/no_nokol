@@ -78,9 +78,9 @@ def textdata():
             return render_template('display.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
         except:
             return render_template('error.html')
-#Assamese plag check route          
-@app.route('/assamese',methods=['GET','POST'])
-def assamese():
+#multilingual plag check route          
+@app.route('/multilingual',methods=['GET','POST'])
+def multilingual():
     if request.method == "POST":
         if request.files:
             file = request.files["file"]
@@ -94,14 +94,14 @@ def assamese():
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 path=f"./static/uploads/{filename}"
-                data,assameseData=extractAssameseText(path,language)
+                data,multilingualData=extractMultilingualText(path,language)
                 res={}
                 try:
                     if os.path.exists(path_final_name):
                         shutil.rmtree(path_final_name)
                     res,plagCount,total,mostProbable=checkPlagNormal(data,sourceFilter)
                     # print(res)
-                    return render_template('display.html',res=res,plagCount=plagCount,total=total,assameseData=assameseData,mostProbable=mostProbable)
+                    return render_template('display.html',res=res,plagCount=plagCount,total=total,multilingualData=multilingualData,mostProbable=mostProbable)
                 except:
                     if os.path.exists(path_final_name):
                         shutil.rmtree(path_final_name)
@@ -114,10 +114,10 @@ def assamese():
             if os.path.exists(path_final_name):
                         shutil.rmtree(path_final_name)
             return render_template('error.html')
-    return render_template('assamese.html')
-#Assamese text area post route
-@app.route('/assameseText',methods=['POST'])
-def assameseText():
+    return render_template('multilingual.html')
+#multilingual text area post route
+@app.route('/multilingualText',methods=['POST'])
+def multilingualText():
     if request.method=='POST':
         try:
             data = request.form["input"]
@@ -125,12 +125,12 @@ def assameseText():
             language=request.form['language']
             if data == "":
                 return render_template('error.html')
-            data,assameseData= inputAssameseDataExtract(data,language)
+            data,multilingualData= inputMultilingualDataExtract(data,language)
             # print(data)
             res={}
             res,plagCount,total,mostProbable=checkPlagNormal(data,sourceFilter)
             # print(res)
-            return render_template('display.html',res=res,plagCount=plagCount,total=total,assameseData=assameseData,mostProbable=mostProbable)
+            return render_template('display.html',res=res,plagCount=plagCount,total=total,multilingualData=multilingualData,mostProbable=mostProbable)
         except:
             return render_template('error.html')
 #Intelligent plag check route

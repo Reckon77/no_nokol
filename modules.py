@@ -13,7 +13,7 @@ LOCATION=os.getenv("LOCATION")
 
 from nltk.tokenize import sent_tokenize
 
-#function to translate assamese into english (Microsoft Translation API)
+#function to translate input language into english (Microsoft Translation API)
 import requests, uuid, json
 def translate(text,language):
     # Add your subscription key and endpoint
@@ -65,8 +65,8 @@ def extractText(path):
     # data=data.split('. ') 
     #return array of sentences
     return data
-#function to extract the assamese text data from files and return it
-def extractAssameseText(path,language):
+#function to extract the multilingual text data from files and return it
+def extractMultilingualText(path,language):
     data=extractData(path)
     data = cleanData(data)
     #since MS API support translation upto 5000 characters only
@@ -76,8 +76,8 @@ def extractAssameseText(path,language):
     translatedData=sent_tokenize(translatedData)
     # translatedData=translatedData.split('. ')
     return translatedData,data
-#function to extract the assamese text data from text area input and return it
-def inputAssameseDataExtract(data,language):
+#function to extract the multilingual text data from text area input and return it
+def inputMultilingualDataExtract(data,language):
     data = cleanData(data)
     if len(data)>=5000:
         raise "text limit exceeded"

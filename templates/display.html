@@ -33,7 +33,7 @@
       {% endfor %} {% endif %}
     </div>
 
-    {% if assameseData|length > 0 %}
+    {% if multilingualData|length > 0 %}
     <div
       class="
         container
@@ -44,8 +44,8 @@
         justify-content-center
       "
     >
-      <h3>Assamese text</h3>
-      <p class="fw-bold">{{assameseData}}</p>
+      <h3>Native text</h3>
+      <p class="fw-bold">{{multilingualData}}</p>
     </div>
 
     {% endif %}
