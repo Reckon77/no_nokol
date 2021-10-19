@@ -85,6 +85,7 @@ def assamese():
         if request.files:
             file = request.files["file"]
             sourceFilter = request.form["sourceFilter"]
+            language=request.form['language']
             if not os.path.exists(path_final_name):
                 os.mkdir(path_final_name)
             if file.filename == "":
@@ -93,7 +94,7 @@ def assamese():
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 path=f"./static/uploads/{filename}"
-                data,assameseData=extractAssameseText(path)
+                data,assameseData=extractAssameseText(path,language)
                 res={}
                 try:
                     if os.path.exists(path_final_name):
@@ -121,9 +122,10 @@ def assameseText():
         try:
             data = request.form["input"]
             sourceFilter = request.form["sourceFilter"]
+            language=request.form['language']
             if data == "":
                 return render_template('error.html')
-            data,assameseData= inputAssameseDataExtract(data)
+            data,assameseData= inputAssameseDataExtract(data,language)
             # print(data)
             res={}
             res,plagCount,total,mostProbable=checkPlagNormal(data,sourceFilter)

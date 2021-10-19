@@ -11,9 +11,11 @@ load_dotenv()
 API_KEY=os.getenv("API_KEY")
 LOCATION=os.getenv("LOCATION")
 
+from nltk.tokenize import sent_tokenize
+
 #function to translate assamese into english (Microsoft Translation API)
 import requests, uuid, json
-def translate(text):
+def translate(text,language):
     # Add your subscription key and endpoint
     subscription_key = API_KEY
     endpoint = "https://api.cognitive.microsofttranslator.com"
@@ -24,7 +26,7 @@ def translate(text):
     constructed_url = endpoint + path
     params = {
         'api-version': '3.0',
-        'from': 'as',
+        'from': language,
         'to': ['en']
     }
     constructed_url = endpoint + path
@@ -41,46 +43,53 @@ def translate(text):
     request = requests.post(constructed_url, params=params, headers=headers, json=body)
     response = request.json()
     return response[0]['translations'][0]['text']
-
-#function to extract the english text data from files and return it
-def extractText(path):
-    #extract
+def extractData(path):
     raw = parser.from_file(path)
     data=raw['content']
+    return data
+
+def cleanData(data):
     #remove extra space
     data = " ".join(data.split())
     #remove links
     data = re.sub(r'http\S+', '', data)
+    return data
+#function to extract the english text data from files and return it
+def extractText(path):
+    #extract
+    data=extractData(path)
+    #clean
+    data = cleanData(data)
     #break into sentences
-    data=data.split('. ') 
+    data=sent_tokenize(data)
+    # data=data.split('. ') 
     #return array of sentences
     return data
 #function to extract the assamese text data from files and return it
-def extractAssameseText(path):
-    raw = parser.from_file(path)
-    data=raw['content']
-    data = " ".join(data.split())
-    data = re.sub(r'http\S+', '', data)
+def extractAssameseText(path,language):
+    data=extractData(path)
+    data = cleanData(data)
     #since MS API support translation upto 5000 characters only
     if len(data)>=5000:
         raise "text limit exceeded"
-    translatedData=translate(data)
-    translatedData=translatedData.split('. ')
+    translatedData=translate(data,language)
+    translatedData=sent_tokenize(translatedData)
+    # translatedData=translatedData.split('. ')
     return translatedData,data
 #function to extract the assamese text data from text area input and return it
-def inputAssameseDataExtract(data):
-    data = " ".join(data.split())
-    data = re.sub(r'http\S+', '', data)
+def inputAssameseDataExtract(data,language):
+    data = cleanData(data)
     if len(data)>=5000:
         raise "text limit exceeded"
-    translatedData=translate(data)
-    translatedData=translatedData.split('. ')
+    translatedData=translate(data,language)
+    translatedData=sent_tokenize(translatedData)
+    # translatedData=translatedData.split('. ')
     return translatedData,data
 #function to extract the english text data from text area input and return it
 def inputDataExtract(textData):
-    textData=" ".join(textData.split())
-    textData = re.sub(r'http\S+', '', textData)
-    textData=textData.split('. ') 
+    data = cleanData(data)
+    data=sent_tokenize(data)
+    # textData=textData.split('. ') 
     return textData
 #file validation function
 def allowed_file(filename):
