@@ -66,13 +66,13 @@ def extractText(path):
     #return array of sentences
     return data
 #Extract and tokenize assamese text
-def extractAssameseText(path):
+def extractDMultilingualText(path,delimiter):
     #extract
     data=extractData(path)
     #clean
     data = cleanData(data)
     #break into sentences
-    data=data.split('। ')
+    data=data.split(f'{delimiter} ')
     # data=data.split('. ') 
     #return array of sentences
     return data
@@ -103,10 +103,10 @@ def inputDataExtract(data):
     data=sent_tokenize(data)
     # textData=textData.split('. ') 
     return data
-def assameseInputDataExtract(data):
+def DMultilingualInputDataExtract(data,delimiter):
     data = cleanData(data)
     # data=sent_tokenize(data)
-    data=data.split('। ') 
+    data=data.split(f'{delimiter} ') 
     # print(data)
     return data
 

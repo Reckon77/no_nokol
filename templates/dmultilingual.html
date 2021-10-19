@@ -46,8 +46,39 @@
           <div class="row">
             <div class="col">
               <div class="mb-3 mt-3">
-                <h2 class="mb-3" style="font-weight: 300">Assamese</h2>
-                <form action="/assamese" method="POST" enctype="multipart/form-data">
+                <h2 class="mb-3" style="font-weight: 300">Direct Multilingual</h2>
+                <form action="/dmultilingual" method="POST" enctype="multipart/form-data">
+                  <!-- Select language start-->
+                  <label for="language">Select a language</label>
+                  <select class="form-select form-select-sm my-3" name="delimiter" aria-label=".form-select-sm example" id="language">
+                    <option selected value=".">Open this select menu</option>
+                    <option value=".">Arabic</option>
+                    <option value="।">Assamese</option>
+                    <option value="।">Bangla</option>
+                    <option value="。">Chinese(literary)</option>
+                    <option value=".">Filipino</option>
+                    <option value=".">French</option>
+                    <option value=".">German</option>
+                    <option value=".">Gujarati</option>
+                    <option value="।">Hindi</option>
+                    <option value=".">Indonesian</option>
+                    <option value=".">Italian</option>
+                    <option value="。">Japanese</option>
+                    <option value=".">Kannada</option>
+                    <option value=".">Korean</option>
+                    <option value=".">Malayalam</option>
+                    <option value=".">Marathi</option>
+                    <option value="။">Myanmar</option>
+                    <option value="।">Nepali</option>
+                    <option value="|">Odia</option>
+                    <option value=".">Punjabi</option>
+                    <option value=".">Russian</option>
+                    <option value=".">Spanish</option>
+                    <option value=".">Tamil</option>
+                    <option value=".">Telugu</option>
+                    <option value="۔">Urdu</option>
+                  </select>
+                  <!-- Select language end-->
                   <div class="form-group">
                     <label class="form-label custom-file-label" for="formFileLg >Select file</label>
                     <div class="custom-file">
@@ -121,9 +152,38 @@
      <!--Header ends-->
       <div class="container my-5 d-flex flex-column" id="non-assamese">
         <div class="alert alert-info" role="alert" style="text-align: center;">
-          How it works: Assamese plagiarism checker breaks the document into sentences and looks for matches of those sentences on the web.
+          How it works: Direct multilingual plagiarism checker breaks the document into sentences and looks for matches of those sentences on the web.
         </div>
-        <form action="/assamesetext" method="POST">
+        <form action="/dmultilingualtext" method="POST">
+          <label for="language">Select a language</label>
+                  <select class="form-select form-select-sm my-3" name="delimiter" aria-label=".form-select-sm example" id="language">
+                    <option selected value=".">Open this select menu</option>
+                    <option value=".">Arabic</option>
+                    <option value="।">Assamese</option>
+                    <option value="।">Bangla</option>
+                    <option value="。">Chinese(literary)</option>
+                    <option value=".">Filipino</option>
+                    <option value=".">French</option>
+                    <option value=".">German</option>
+                    <option value=".">Gujarati</option>
+                    <option value="।">Hindi</option>
+                    <option value=".">Indonesian</option>
+                    <option value=".">Italian</option>
+                    <option value="。">Japanese</option>
+                    <option value=".">Kannada</option>
+                    <option value=".">Korean</option>
+                    <option value=".">Malayalam</option>
+                    <option value=".">Marathi</option>
+                    <option value="။">Myanmar</option>
+                    <option value="।">Nepali</option>
+                    <option value="|">Odia</option>
+                    <option value=".">Punjabi</option>
+                    <option value=".">Russian</option>
+                    <option value=".">Spanish</option>
+                    <option value=".">Tamil</option>
+                    <option value=".">Telugu</option>
+                    <option value="۔">Urdu</option>
+                  </select>
           <input class="form-control form-control-sm" type="text" placeholder="Source filter URL (optional)" name="sourceFilter">
           <textarea
           id='output'

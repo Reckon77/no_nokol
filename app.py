@@ -179,7 +179,6 @@ def intelligentTextdata():
         try:
             data = request.form["input"]
             sourceFilter = request.form["sourceFilter"]
-            print(sourceFilter)
             if data == "":
                 return render_template('error.html')
             data = inputDataExtract(data)
@@ -192,14 +191,15 @@ def intelligentTextdata():
         except:
             return render_template('error.html')
 
-#Assamese plag check route
-@app.route("/assamese", methods=["GET", "POST"])
-def assamese():
+#direct multilingual plag check route
+@app.route("/dmultilingual", methods=["GET", "POST"])
+def dmultilingual():
     if request.method == "POST":
         if request.files:
             #getting the uploaded file
             file = request.files['file']
             sourceFilter = request.form["sourceFilter"]
+            delimiter=request.form['delimiter']
             if not os.path.exists(path_final_name):
                 os.mkdir(path_final_name)
             #empty file name returns error
@@ -213,7 +213,7 @@ def assamese():
                     #getting the file path
                 path=f"./static/uploads/{filename}"
                     #extracting text from data
-                data=extractAssameseText(path)
+                data=extractDMultilingualText(path,delimiter)
                     # print(data)
                 res={}
                 try:
@@ -235,19 +235,20 @@ def assamese():
             if os.path.exists(path_final_name):
                         shutil.rmtree(path_final_name)
             return render_template('error.html')
-    return render_template('assamese.html')
-#Assamese text area post route
-@app.route('/assamesetext',methods=['POST'])
-def assamesetext():
+    return render_template('dmultilingual.html')
+#direct multilingual text area post route
+@app.route('/dmultilingualtext',methods=['POST'])
+def dmultilingualtext():
     if request.method=='POST':
         try:
             #getting the text data
             data = request.form["input"]
             sourceFilter = request.form["sourceFilter"]
+            delimiter=request.form['delimiter']
             if data == "":
                 return render_template('error.html')
             #breaking it into sentences
-            data = assameseInputDataExtract(data)
+            data = DMultilingualInputDataExtract(data,delimiter)
             res={}
             #getting the links
             res,plagCount,total,mostProbable=checkPlag(data,sourceFilter)
