@@ -1,5 +1,6 @@
 #Importing required libs
 import re
+import gc
 #Tika is used to import text data from pdf,docx,txt files
 from tika import parser
 import tika
@@ -42,6 +43,7 @@ def translate(text,language):
     }]
     request = requests.post(constructed_url, params=params, headers=headers, json=body)
     response = request.json()
+    gc.collect()
     return response[0]['translations'][0]['text']
 def extractData(path):
     raw = parser.from_file(path)
@@ -148,6 +150,7 @@ def findPlag(text,session,sourceFilter=""):
     with session.get(url,headers= header, allow_redirects=True) as response:
         page = response
     content = BeautifulSoup(page.content, 'html.parser')
+    gc.collect()
     #print(content.prettify())
     #return content
     # link= content.find('h2')
@@ -160,6 +163,7 @@ def findPlag(text,session,sourceFilter=""):
             return link
     except:
         return ""
+        
 #function that return a link for relevant match of the query is found
 def findPlagNormal(text,session,sourceFilter=""):
     #text = text.replace(" ","+")
@@ -169,6 +173,7 @@ def findPlagNormal(text,session,sourceFilter=""):
     with session.get(url,headers= header, allow_redirects=True) as response:
         page = response
     content = BeautifulSoup(page.content, 'html.parser')
+    gc.collect()
     #print(content.prettify())
     #return content
     # link= content.find('h2')
