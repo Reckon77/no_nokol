@@ -1,5 +1,6 @@
 #Importing required libs
 import re
+import gc
 #Tika is used to import text data from pdf,docx,txt files
 from tika import parser
 import tika
@@ -42,6 +43,7 @@ def translate(text,language):
     }]
     request = requests.post(constructed_url, params=params, headers=headers, json=body)
     response = request.json()
+    gc.collect()
     return response[0]['translations'][0]['text']
 def extractData(path):
     raw = parser.from_file(path)
@@ -148,6 +150,7 @@ def findPlag(text,session,sourceFilter=""):
     with session.get(url,headers= header, allow_redirects=True) as response:
         page = response
     content = BeautifulSoup(page.content, 'html.parser')
+    gc.collect()
     #print(content.prettify())
     #return content
     # link= content.find('h2')
@@ -165,11 +168,12 @@ def findPlag(text,session,sourceFilter=""):
 def findPlagNormal(text,session,sourceFilter=""):
     #text = text.replace(" ","+")
     # print(text)
-    url = f'https://www.bing.com/search?q={text}&qs=n&form=QBRE&sp=-1&pq={text.lower()}' 
+    url = f'https://www.bing.com/search?q="{text}"&qs=n&form=QBRE&sp=-1&pq="{text.lower()}"' 
     header = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'}
     with session.get(url,headers= header, allow_redirects=True) as response:
         page = response
     content = BeautifulSoup(page.content, 'html.parser')
+    gc.collect()
     #print(content.prettify())
     #return content
     # link= content.find('h2')
