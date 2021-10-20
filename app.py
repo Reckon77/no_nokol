@@ -4,8 +4,10 @@ from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 import os
 from os.path import join, dirname, realpath
+
 from modules import *
 import shutil
+
 #flask config
 app = Flask(__name__)
 #setting the absolute path for file upload folder
@@ -277,6 +279,7 @@ def dmultilingualtext():
 @app.errorhandler(413)
 def too_large(e):
     return "File size is too large.", 413
+
 
 if __name__ == "__main__":
     app.run()
