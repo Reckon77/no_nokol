@@ -1,4 +1,5 @@
 #Importing required libs
+import gc
 from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 import os
@@ -42,7 +43,12 @@ def index():
                     if os.path.exists(path_final_name):
                         shutil.rmtree(path_final_name)
                     #getting the links and other attributes
+                    # print(len( gc.get_objects() ) )
                     res,plagCount,total,mostProbable=checkPlag(data,sourceFilter)
+                    
+                    gc.collect()
+                    # print(len( gc.get_objects() ))
+ 
                     # print(res)
                     return render_template('display.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
                 except:
@@ -73,6 +79,7 @@ def textdata():
             res={}
             #getting the links
             res,plagCount,total,mostProbable=checkPlag(data,sourceFilter)
+            gc.collect()
            
             # print(res)
             return render_template('display.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
@@ -95,11 +102,13 @@ def multilingual():
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 path=f"./static/uploads/{filename}"
                 data,multilingualData=extractMultilingualText(path,language)
+                gc.collect()
                 res={}
                 try:
                     if os.path.exists(path_final_name):
                         shutil.rmtree(path_final_name)
                     res,plagCount,total,mostProbable=checkPlagNormal(data,sourceFilter)
+                    gc.collect()
                     # print(res)
                     return render_template('display.html',res=res,plagCount=plagCount,total=total,multilingualData=multilingualData,mostProbable=mostProbable)
                 except:
@@ -126,9 +135,11 @@ def multilingualText():
             if data == "":
                 return render_template('error.html')
             data,multilingualData= inputMultilingualDataExtract(data,language)
+            gc.collect()
             # print(data)
             res={}
             res,plagCount,total,mostProbable=checkPlagNormal(data,sourceFilter)
+            gc.collect()
             # print(res)
             return render_template('display.html',res=res,plagCount=plagCount,total=total,multilingualData=multilingualData,mostProbable=mostProbable)
         except:
@@ -156,6 +167,7 @@ def intelligent():
                     if os.path.exists(path_final_name):
                         shutil.rmtree(path_final_name)
                     res,plagCount,total,mostProbable=checkPlagIntelligent(data,sourceFilter)
+                    gc.collect()
                     # print(res)
                     return render_template('displayIntelligent.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
                 except:
@@ -186,6 +198,7 @@ def intelligentTextdata():
             # data,original=transformToSynonyms(data)
             res={}
             res,plagCount,total,mostProbable=checkPlagIntelligent(data,sourceFilter)
+            gc.collect()
             # print(res)
             return render_template('displayIntelligent.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
         except:
@@ -221,6 +234,7 @@ def dmultilingual():
                         shutil.rmtree(path_final_name)
                     #getting the links and other attributes
                     res,plagCount,total,mostProbable=checkPlag(data,sourceFilter)
+                    gc.collect()
                     # print(res)
                     return render_template('display.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
                 except:
@@ -252,6 +266,7 @@ def dmultilingualtext():
             res={}
             #getting the links
             res,plagCount,total,mostProbable=checkPlag(data,sourceFilter)
+            gc.collect()
            
             # print(res)
             return render_template('display.html',res=res,plagCount=plagCount,total=total,mostProbable=mostProbable)
