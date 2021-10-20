@@ -165,7 +165,7 @@ def findPlag(text,session,sourceFilter=""):
 def findPlagNormal(text,session,sourceFilter=""):
     #text = text.replace(" ","+")
     # print(text)
-    url = f'https://www.bing.com/search?q="{text}"&qs=n&form=QBRE&sp=-1&pq="{text.lower()}"' 
+    url = f'https://www.bing.com/search?q={text}&qs=n&form=QBRE&sp=-1&pq={text.lower()}' 
     header = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'}
     with session.get(url,headers= header, allow_redirects=True) as response:
         page = response
