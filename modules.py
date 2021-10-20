@@ -160,6 +160,7 @@ def findPlag(text,session,sourceFilter=""):
             return link
     except:
         return ""
+        
 #function that return a link for relevant match of the query is found
 def findPlagNormal(text,session,sourceFilter=""):
     #text = text.replace(" ","+")
