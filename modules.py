@@ -51,9 +51,15 @@ def extractData(path):
 def cleanData(data):
     #remove extra space
     data = " ".join(data.split())
-    #remove links
+     #remove links
     data = re.sub(r'http\S+', '', data)
+    #remove quoted text
+    data = re.sub(r'"[\w\s]+"', '', data)
+    #remove names/
+    prefixes = ['Mr', 'Mrs', 'Shri', 'Sri', 'Dr', 'Phd']
+    data = re.sub(r'\b(?:'+'|'.join(prefixes)+ ')\.\s*\S+', '', data)
     return data
+
 #function to extract the english text data from files and return it
 def extractText(path):
     #extract
