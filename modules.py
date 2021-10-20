@@ -131,14 +131,16 @@ def allowed_file(filename):
 
 # Scrapper
 from bs4 import BeautifulSoup
+from concurrent.futures import ThreadPoolExecutor
 #function that return a link if exact match of the query is found
-def findPlag(text,sourceFilter=""):
+def findPlag(text,session,sourceFilter=""):
     #text = text.replace(" ","+")
     # print(text)
     url = f'https://www.bing.com/search?q=%2B"{text}"&qs=n&form=QBRE&sp=-1&pq=%2B"{text.lower()}"'
     # Crafting the proper request 
     header = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'}
-    page = requests.get(url, headers= header, allow_redirects=True)
+    with session.get(url,headers= header, allow_redirects=True) as response:
+        page = response
     content = BeautifulSoup(page.content, 'html.parser')
     #print(content.prettify())
     #return content
@@ -153,12 +155,13 @@ def findPlag(text,sourceFilter=""):
     except:
         return ""
 #function that return a link for relevant match of the query is found
-def findPlagNormal(text,sourceFilter=""):
+def findPlagNormal(text,session,sourceFilter=""):
     #text = text.replace(" ","+")
     # print(text)
     url = f'https://www.bing.com/search?q="{text}"&qs=n&form=QBRE&sp=-1&pq="{text.lower()}"' 
     header = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0'}
-    page = requests.get(url, headers= header, allow_redirects=True)
+    with session.get(url,headers= header, allow_redirects=True) as response:
+        page = response
     content = BeautifulSoup(page.content, 'html.parser')
     #print(content.prettify())
     #return content
@@ -180,36 +183,34 @@ from collections import defaultdict,Counter
 def checkPlag(data,sourceFilter=""):
     res={}
     websites=defaultdict(int)
-    plagCount=0
-    total=0
-    for sentence in data:
-        link=findPlag(sentence,sourceFilter)
-        res[sentence]=link
-        total+=1
+    with ThreadPoolExecutor(max_workers=100) as executor:
+        with requests.Session() as session:
+            results = list(executor.map(findPlag, data,[session] * len(data),[sourceFilter] * len(data)))
+    for link in results:
         if link!='':
             websites[link]+=1
-        if res[sentence]!='':
-            plagCount+=1
     k = Counter(websites)
     mostProbable = k.most_common(3)
+    plagCount = len(results)-results.count("")
+    total=len(data)
+    res=dict(zip(data,results))
     return res,plagCount,total,mostProbable
 #function that takes array of sentences as input and returns associated links, plagiarism count
 #total sentences, mostProbable sentences using relevant match function
 def checkPlagNormal(data,sourceFilter=""):
     res={}
     websites=defaultdict(int)
-    plagCount=0
-    total=0
-    for sentence in data:
-        link=findPlagNormal(sentence,sourceFilter)
-        res[sentence]=link
-        total+=1
+    with ThreadPoolExecutor(max_workers=100) as executor:
+        with requests.Session() as session:
+            results = list(executor.map(findPlagNormal, data,[session] * len(data),[sourceFilter] * len(data)))
+    for link in results:
         if link!='':
             websites[link]+=1
-        if res[sentence]!='':
-            plagCount+=1
     k = Counter(websites)
     mostProbable = k.most_common(3)
+    plagCount = len(results)-results.count("")
+    total=len(data)
+    res=dict(zip(data,results))
     return res,plagCount,total,mostProbable
 #Intelligent Plagiarism checker
 import nltk
@@ -276,18 +277,20 @@ def transformToSynonyms(data):
 
 def checkPlagIntelligent(data,sourceFilter=""):
     res={}
+    transformedData = list(map(transformSentence, data))
     websites=defaultdict(int)
-    plagCount=0
-    total=0
+    with ThreadPoolExecutor(max_workers=100) as executor:
+        with requests.Session() as session:
+            results = list(executor.map(findPlagNormal, transformedData,[session] * len(transformedData),[sourceFilter] * len(transformedData)))
+    i=0
     for sentence in data:
-        tranformedText=transformSentence(sentence)
-        link=findPlagNormal(tranformedText,sourceFilter)
-        res[sentence]=[tranformedText,link]
-        total+=1
+        res[sentence]=[transformedData[i],results[i]]
+        i+=1
+    for link in results:
         if link!='':
             websites[link]+=1
-        if res[sentence][1]!='':
-            plagCount+=1
     k = Counter(websites)
     mostProbable = k.most_common(3)
+    plagCount = len(results)-results.count("")
+    total=len(data)
     return res,plagCount,total,mostProbable
