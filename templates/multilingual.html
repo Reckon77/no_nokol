@@ -46,38 +46,38 @@
           <div class="row">
             <div class="col">
               <div class="mb-3 mt-3">
-                <h2 class="mb-3" style="font-weight: 300">Multilingual</h2>
+                <h2 class="mb-3" style="font-weight: 300">Translated Multilingual (Beta)</h2>
                 <form action="/multilingual" method="POST" enctype="multipart/form-data">
                   <!-- Select language start-->
-                  <label for="language"></label>
-                  <select class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" name="delimiter" aria-label=".form-select-sm example" id="language">
-                    <option selected value="." class="dropdown-menu">Select language</option>
-                    <option value="." class="dropdown-item">Arabic</option>
-                    <option value="।" class="dropdown-item">Assamese</option>
-                    <option value="।" class="dropdown-item">Bangla</option>
-                    <option value="。" class="dropdown-item">Chinese(literary)</option>
-                    <option value="." class="dropdown-item">Filipino</option>
-                    <option value="." class="dropdown-item">French</option>
-                    <option value="." class="dropdown-item">German</option>
-                    <option value="." class="dropdown-item">Gujarati</option>
-                    <option value="।" class="dropdown-item">Hindi</option>
-                    <option value="." class="dropdown-item">Indonesian</option>
-                    <option value="." class="dropdown-item">Italian</option>
-                    <option value="。" class="dropdown-item">Japanese</option>
-                    <option value="." class="dropdown-item">Kannada</option>
-                    <option value="." class="dropdown-item">Korean</option>
-                    <option value="." class="dropdown-item">Malayalam</option>
-                    <option value="." class="dropdown-item">Marathi</option>
-                    <option value="။" class="dropdown-item">Myanmar</option>
-                    <option value="।" class="dropdown-item">Nepali</option>
-                    <option value="|" class="dropdown-item">Odia</option>
-                    <option value="." class="dropdown-item">Punjabi</option>
-                    <option value="." class="dropdown-item">Russian</option>
-                    <option value="." class="dropdown-item">Spanish</option>
-                    <option value="." class="dropdown-item">Tamil</option>
-                    <option value="." class="dropdown-item">Telugu</option>
-                    <option value="۔" class="dropdown-item">Urdu</option>
-                  </select><br/><br>
+                  <!-- <label for="language">Select a language</label> -->
+                  <select class="btn btn-info dropdown-toggle dropdown-toggle-split my-3" data-toggle="dropdown" aria-haspopup="true" name="language" aria-label=".form-select-sm example" id="language">
+                    <option selected value="en" class="dropdown-menu">Select language</option>
+                    <option value="ar" class="dropdown-item">Arabic</option>
+                    <option value="as" class="dropdown-item">Assamese</option>
+                    <option value="bn" class="dropdown-item">Bangla</option>
+                    <option value="lzh" class="dropdown-item">Chinese</option>
+                    <option value="fil" class="dropdown-item">Filipino</option>
+                    <option value="fr" class="dropdown-item">French</option>
+                    <option value="de" class="dropdown-item">German</option>
+                    <option value="gu" class="dropdown-item">Gujarati</option>
+                    <option value="hi" class="dropdown-item">Hindi</option>
+                    <option value="id" class="dropdown-item">Indonesian</option>
+                    <option value="it" class="dropdown-item">Italian</option>
+                    <option value="ja" class="dropdown-item">Japanese</option>
+                    <option value="kn" class="dropdown-item">Kannada</option>
+                    <option value="ko" class="dropdown-item">Korean</option>
+                    <option value="ml" class="dropdown-item">Malayalam</option>
+                    <option value="mr" class="dropdown-item">Marathi</option>
+                    <option value="my" class="dropdown-item">Myanmar</option>
+                    <option value="ne" class="dropdown-item">Nepali</option>
+                    <option value="or" class="dropdown-item">Odia</option>
+                    <option value="pa" class="dropdown-item">Punjabi</option>
+                    <option value="ru" class="dropdown-item">Russian</option>
+                    <option value="es" class="dropdown-item">Spanish</option>
+                    <option value="ta" class="dropdown-item">Tamil</option>
+                    <option value="te" class="dropdown-item">Telugu</option>
+                    <option value="ur" class="dropdown-item">Urdu</option>
+                  </select>
                   <!-- Select language end-->
                   <div class="form-group">
                     <label class="form-label custom-file-label" for="formFileLg >Select file</label>
@@ -128,10 +128,14 @@
             </div>
           </div>
         </div>
-        <div class="alert alert-warning d-none mb-3 mt-3" id="alert-modal"><span style="font-weight: bolder; color:red">WARNING!</span> File size greater than 20mb not allowed.</div>
+        <div class="d-flex justify-content-center mt-3">
 
-        <div class="alert alert-success d-none mb-3 mt-5" id="alert-modal-ext"><span style="font-weight: bolder; color:seagreen">INFO!</span> File extension allowed are: .DOC |.TXT |.PDF |.ODT</div>
+          <div class="alert alert-warning d-none mb-3 mt-3" id="alert-modal"><span style="font-weight: bolder; color:red">WARNING!</span> File size greater than 20mb not allowed.</div>
 
+          <div class="alert alert-success d-none mt-5" id="alert-modal-ext"><span style="font-weight: bolder; color:seagreen;">INFO!</span> File extension allowed are: .DOC |.TXT |.PDF |.ODT</div>
+          <div class="alert alert-success d-none mt-5" id="alert-modal-support"><span style="font-weight: bolder; color:seagreen;">INFO!</span> Supports upto 5000 characters documents only</div>
+        </div>
+      
       <!--Waves Container-->
       <div class="waves">
         <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -152,38 +156,38 @@
      <!--Header ends-->
       <div class="container my-5 d-flex flex-column" id="non-assamese">
         <div class="alert alert-info" role="alert" style="text-align: center;">
-          How it works: Direct multilingual plagiarism checker breaks the document into sentences and looks for matches of those sentences on the web.
+          How it works: Translated multilingual plagiarism checker first translates the document into English and then check for plagiarism in the web
         </div>
-        <form action="/multilingualtext" method="POST">
+        <form action="/multilingualText" method="POST">
           <label for="language">Select a language</label>
-                  <select class="form-select form-select-sm my-3" name="delimiter" aria-label=".form-select-sm example" id="language">
-                    <option selected value=".">Open this select menu</option>
-                    <option value=".">Arabic</option>
-                    <option value="।">Assamese</option>
-                    <option value="।">Bangla</option>
-                    <option value="。">Chinese(literary)</option>
-                    <option value=".">Filipino</option>
-                    <option value=".">French</option>
-                    <option value=".">German</option>
-                    <option value=".">Gujarati</option>
-                    <option value="।">Hindi</option>
-                    <option value=".">Indonesian</option>
-                    <option value=".">Italian</option>
-                    <option value="。">Japanese</option>
-                    <option value=".">Kannada</option>
-                    <option value=".">Korean</option>
-                    <option value=".">Malayalam</option>
-                    <option value=".">Marathi</option>
-                    <option value="။">Myanmar</option>
-                    <option value="।">Nepali</option>
-                    <option value="|">Odia</option>
-                    <option value=".">Punjabi</option>
-                    <option value=".">Russian</option>
-                    <option value=".">Spanish</option>
-                    <option value=".">Tamil</option>
-                    <option value=".">Telugu</option>
-                    <option value="۔">Urdu</option>
-                  </select>
+          <select class="form-select form-select-sm my-3" name="language" aria-label=".form-select-sm example" id="language">
+            <option selected value="en">Open this select menu</option>
+            <option value="ar">Arabic</option>
+            <option value="as">Assamese</option>
+            <option value="bn">Bangla</option>
+            <option value="lzh">Chinese</option>
+            <option value="fil">Filipino</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="gu">Gujarati</option>
+            <option value="hi">Hindi</option>
+            <option value="id">Indonesian</option>
+            <option value="it">Italian</option>
+            <option value="ja">Japanese</option>
+            <option value="kn">Kannada</option>
+            <option value="ko">Korean</option>
+            <option value="ml">Malayalam</option>
+            <option value="mr">Marathi</option>
+            <option value="my">Myanmar</option>
+            <option value="ne">Nepali</option>
+            <option value="or">Odia</option>
+            <option value="pa">Punjabi</option>
+            <option value="ru">Russian</option>
+            <option value="es">Spanish</option>
+            <option value="ta">Tamil</option>
+            <option value="te">Telugu</option>
+            <option value="ur">Urdu</option>
+          </select>
           <input class="form-control form-control-sm" type="text" placeholder="Source filter URL (optional)" name="sourceFilter">
           <textarea
           id='output'
@@ -197,7 +201,9 @@
          
         </form>
       </div>
-
+      <script>
+        alert("Info : The Translated multilingual plagiarism checker is still in beta stages and might not give accurate results.")
+      </script>
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"

@@ -7,6 +7,7 @@ const progressLabel = document.getElementById('progress-label')
 const feedbackval = document.getElementById('feedback')
 const alertModal = document.getElementById('alert-modal');
 const alertExtension = document.getElementById('alert-modal-ext');
+const alertSupport = document.getElementById('alert-modal-support')
 // const modalClose = document.getElementById('close');
 
 const reader = new FileReader();
@@ -28,6 +29,7 @@ fileUploader.addEventListener('change', (event) => {
 
         setTimeout(function(){
           alertExtension.classList.remove("d-none");
+          alertSupport.classList.remove("d-none");
         }, 500); 
       }
     }
@@ -61,7 +63,7 @@ fileUploader.onchange = () => {
             window.location.reload();
           }, 1000); 
         } else {
-          progressbar.classList.remove('d-none')
+          // progressbar.classList.remove('d-none')
             document.getElementById('size').innerHTML = '<b>Size:'
             + filesize + '</b> KB';
 
