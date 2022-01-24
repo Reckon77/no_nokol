@@ -73,7 +73,7 @@ def extractText(path):
     # data=data.split('. ') 
     #return array of sentences
     return data
-#Extract and tokenize assamese text
+#Extract and multilingual text
 def extractDMultilingualText(path,delimiter):
     #extract
     data=extractData(path)
